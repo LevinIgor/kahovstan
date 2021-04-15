@@ -9,7 +9,7 @@
             </div>
             <div class="container">
                 <div
-                v-for="item in products" 
+                v-for="item in this.$store.state.products" 
                 :key="item.name" 
                 class='item'>
                     <div class="second">

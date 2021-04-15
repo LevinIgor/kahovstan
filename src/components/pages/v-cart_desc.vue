@@ -1,7 +1,9 @@
 <template>
 <div class="vCartDesc">
     <v-header></v-header>
-    <div>   </div>
+    <div class="content"> 
+        <div class="category">{{$route.params.id}}</div>
+         </div>
     <v-footer></v-footer>
 </div>
 
@@ -21,5 +23,8 @@ export default {
 </script>
 
 <style >
-
+.content{
+    height: 300px;
+    width: 100%;
+}
 </style>

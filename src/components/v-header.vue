@@ -2,12 +2,12 @@
 <div class="v-header">
       <div class="header">
             <div class="header__logo">
-              <router-link :to="{name:'about'}"><img :src="logo" alt=""></router-link>
+              <router-link :to="'/'"><img :src="logo" alt=""></router-link>
             </div>
             <div class="header__menu">
                
                 <ul>
-                    <li v-for="(item, index) in this.$store.getters.getHeaderCategory" :key="index"><router-link :to="{name:'1'}">{{item}}</router-link> </li>
+                    <li v-for="(item, index) in this.$store.getters.getHeaderCategory" :key="index"><router-link :to="item">{{item}}</router-link> </li>
                 </ul>
 
             </div>

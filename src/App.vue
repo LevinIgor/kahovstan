@@ -14,7 +14,6 @@
 
 
 import VMainWrapper from './components/v-main-wrapper.vue'
-import Firebase from './firebase/firebase'
 export default {
   name: 'vue',
   components: {
@@ -24,16 +23,6 @@ export default {
     
   }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 </script>

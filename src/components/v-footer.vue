@@ -3,7 +3,7 @@
      <div class="footer">
             <div class="menu">
                 <ul>
-                    <li v-for="item in category" :key="item" @click="$router.push()"> <a href="">item</a> </li>
+                    <li v-for="item in this.$store.state.category" :key="item.id" @click="$router.push()"> <a href="">{{item}}</a> </li>
                 </ul>
             </div>
 

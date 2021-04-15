@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import vAbove from '../components/pages/v-above'
+import vAbout from '../components/pages/v-above'
 import vCatalog from '../components/pages/v-catalogPage'
 import vCart from '../components/pages/v-cart_desc'
 const routes = [{
@@ -10,11 +10,10 @@ const routes = [{
     {
         path: '/about',
         name: 'about',
-        component: vAbove
+        component: vAbout
     },
     {
-        path: '/catalog/',
-        name: '1',
+        path: '/:id',
         component: vCart
     }
 ]
