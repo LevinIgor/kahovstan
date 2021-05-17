@@ -4,7 +4,7 @@ import wood from './wood'
 export default createStore({
     state: {
         count: 10,
-        category: ["Деревообролюючі станки", "Металооброблюючі станки", "Слюсарні станки", "Лічільні інструменти", "Витратні матеріали", "Хто є ми?"],
+        category: ["Доставка", "Хто є ми?"],
         products: [{
                 img: 3,
                 name: 'Jukon',
@@ -26,7 +26,54 @@ export default createStore({
                 price: 400000,
                 key: 3,
                 description: 'Jopa is good'
-            }
+            }, {
+                img: 3,
+                name: 'Keril',
+                price: 40000,
+                key: 1,
+                description: 'Jukon is good'
+
+            },
+            {
+                img: 3,
+                name: 'Nito',
+                price: 40000,
+                key: 1,
+                description: 'Jukon is good'
+
+            },
+            {
+                img: 3,
+                name: 'Kollo',
+                price: 40000,
+                key: 1,
+                description: 'Jukon is good'
+
+            },
+            {
+                img: 3,
+                name: 'Niuto',
+                price: 40000,
+                key: 1,
+                description: 'Jukon is good'
+
+            },
+            {
+                img: 3,
+                name: 'Momo',
+                price: 40000,
+                key: 1,
+                description: 'Jukon is good'
+
+            },
+            {
+                img: 3,
+                name: 'Avtor',
+                price: 40000,
+                key: 1,
+                description: 'Jukon is good'
+
+            },
         ]
     },
     mutations: {

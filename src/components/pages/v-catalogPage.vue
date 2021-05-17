@@ -2,6 +2,7 @@
     <div class="v-catalog_page">
        <v-header></v-header>
        <v-catalog></v-catalog>
+       <v-footer></v-footer>
     </div>
 </template>
 
@@ -9,10 +10,14 @@
 
 import vHeader from '../v-header'
 import vCatalog from '../v-catalog'
+import vFooter from '../v-footer'
+
 export default{
 components:{
     vHeader,
-    vCatalog
+    vCatalog,
+    vFooter
+
 }
 }
 

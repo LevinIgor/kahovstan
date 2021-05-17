@@ -49,7 +49,7 @@ export default{
 
 .footer .menu li {
     text-transform: uppercase;
-    font-size: 14;
+    font-size: 10;
 }
 
 .footer .menu ul {
@@ -72,6 +72,9 @@ export default{
 .footer .copyright {
     color: white;
     text-align: right;
+}
+.footer a{
+    font-size: 12px;
 }
 
 </style>

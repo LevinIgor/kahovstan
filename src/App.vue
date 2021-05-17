@@ -1,9 +1,6 @@
 <template>
   <div id="nav">
     <v-main-wrapper></v-main-wrapper>
-
-    
-    
   </div>
 
  

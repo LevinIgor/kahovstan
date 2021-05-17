@@ -19,7 +19,6 @@
                     <div class="first"> <img src="Item.svg" alt="">
                         <div class="name">{{item.name}}</div>
                         <div class="price">{{item.price}}</div>
-
                     </div>
 
 

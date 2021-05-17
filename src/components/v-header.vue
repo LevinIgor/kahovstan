@@ -7,14 +7,16 @@
             <div class="header__menu">
                
                 <ul>
-                    <li v-for="(item, index) in this.$store.getters.getHeaderCategory" :key="index"><router-link :to="item">{{item}}</router-link> </li>
+                    <!-- <li v-for="(item, index) in this.$store.getters.getHeaderCategory" :key="index"><router-link :to="item">{{item}}</router-link> </li> -->
+                    <li><router-link to='carus'>Доставка</router-link></li>
+                     <li><router-link to='about'>Хто ми?</router-link></li>
                 </ul>
 
             </div>
             <div class="header__menu__second">
 
                 <a href=""><img src="account.svg" alt=""></a>
-                <a href=""><img src="shopping-cart.svg" alt=""></a>
+                <a href=""><img :src="shopcart" alt=""></a>
             </div>
         </div>
 </div>
@@ -25,8 +27,9 @@ export default {
   name: 'v-header',
   data () {
       return {
-       logo:require('../assets/pics/Pics/kahovstan.svg.png'),
-       category: ["Деревообролюючі станки", "Металооброблюючі станки", "Слюсарні станки", "Лічільні інструменти", "Витратні матеріали", "Доставка", "Хто є ми?"], 
+       logo:require('../assets/pics/kahovstan.svg.png'),
+       shopcart: require('../assets/pics/shopping-cart.svg'),
+       category: ["Доставка", "Хто є ми?"], 
       }
   }
        
@@ -39,10 +42,12 @@ li{
     list-style-type: none;
     cursor: pointer;
 }
+
 a{
     text-decoration: none;
     color: white;
 }
+
 .header {
     padding: 10px 40px;
     height: 100%;
@@ -76,20 +81,22 @@ a{
     width: 100%;
 }
 
-.header .header__menu a {
-    text-transform: uppercase;
-    font-size: 12px;
-}
 
-.header .header__menu a:hover::after {
+
+/* .header .header__menu a:hover::after {
     content: '';
     display: block;
     height: 1px;
     background: white;
     transition: transform linear .5s;
-}
+} */
 
 .header .header__menu ul {
+      text-transform: uppercase;
+    font-size: 12px;
+    text-decoration: none;
+    color: white;
+
     display: flex;
     padding: 0px 10px 0px 10px;
     justify-content: space-between;
@@ -97,7 +104,9 @@ a{
 
 .header .header__menu li {
     text-align: center;
+    
 }
+
 
 
 /* /header__MENU */
