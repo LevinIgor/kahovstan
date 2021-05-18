@@ -7,6 +7,8 @@ import 'firebase/auth'
 import 'firebase/database'
 
 
+
+
 var firebaseConfig = {
     apiKey: "AIzaSyCLG09IE-yLkPNKHJEzitsi8x-nvkzceu4",
     authDomain: "kahovstan.firebaseapp.com",

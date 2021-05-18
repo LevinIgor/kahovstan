@@ -2,9 +2,9 @@
     <div class="about">
      <v-header></v-header>
    <!-- <router-link :to="{name:'catalog'}">Catalog</router-link></v-catalog> -->
-   <div class="tex">
-     dflkdjfkldfjdkls
-   </div>
+  <div class="text">
+    <p>defhdsjfkldhsfkjhadkljhfdkljfhdkljfhdkljfhadkljhfla</p>
+  </div>
 <div class="content">
   <ImgComparisonSlider>
     <!-- eslint-disable -->
@@ -19,27 +19,26 @@
       :src="after"
     />
     <!-- eslint-enable -->
-  </ImgComparisonSlider>
-
-
-
-  
+  </ImgComparisonSlider>  
 </div>
- 
-  
-
-
-     <v-footer></v-footer>  
+ <div class="footer">
+    <v-footer></v-footer>  
+ </div>
+    
     </div>
 </template>
 
 <script>
+
 
 import vHeader from '../v-header'
 import vCatalog from '../v-catalog'
 import vFooter from '../v-footer'
 import { ImgComparisonSlider } from '@img-comparison-slider/vue';
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
+
+
+
 
 export default{
   components:{
@@ -48,7 +47,8 @@ export default{
     vFooter,
     ImgComparisonSlider,
     Splide,
-    SplideSlide
+    SplideSlide,
+  
   },
   data(){
     return{
@@ -59,6 +59,21 @@ export default{
           width  : 800,
           gap    : '1rem'}
     }
+  },
+  methods:{
+    setItem(){
+      db.collection("cities").doc("LA").set({
+    name: "Los Angeles",
+    state: "CA",
+    country: "USA"
+})
+.then(() => {
+    console.log("Document successfully written!");
+})
+.catch((error) => {
+    console.error("Error writing document: ", error);
+});
+    }
   }
   
 }
@@ -66,18 +81,16 @@ export default{
 
 <style scoped>
 
-.content{
-  max-width: 900px;
-}
+
 a{
     color:black;
 }
 
-img-comparison-slider {
-    --divider-width: 2px;
-    --divider-color: #c0c0c0;
-    --handle-opacity: 0.3;
-  }
+.footer{
+ z-index: 1000000;
+}
+
+
 
   /* img{
     width: 100%;

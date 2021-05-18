@@ -10,13 +10,14 @@
                     <!-- <li v-for="(item, index) in this.$store.getters.getHeaderCategory" :key="index"><router-link :to="item">{{item}}</router-link> </li> -->
                     <li><router-link to='carus'>Доставка</router-link></li>
                      <li><router-link to='about'>Хто ми?</router-link></li>
+                     <li> <router-link to='shopping-cart'>Shopping cart</router-link></li>
                 </ul>
 
             </div>
             <div class="header__menu__second">
 
-                <a href=""><img src="account.svg" alt=""></a>
-                <a href=""><img :src="shopcart" alt=""></a>
+                
+                <router-link to='about'><img :src="shopcart" alt=""></router-link>
             </div>
         </div>
 </div>
