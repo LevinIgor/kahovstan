@@ -8,16 +8,16 @@
                
                 <ul>
                     <!-- <li v-for="(item, index) in this.$store.getters.getHeaderCategory" :key="index"><router-link :to="item">{{item}}</router-link> </li> -->
-                    <li><router-link to='carus'>Доставка</router-link></li>
+                   
                      <li><router-link to='about'>Хто ми?</router-link></li>
-                     <li> <router-link to='shopping-cart'>Shopping cart</router-link></li>
+                    
+                     <li>  <router-link to="booking">booking</router-link></li>
+                     <li><router-link to="productCart">product cart</router-link></li>
                 </ul>
 
             </div>
             <div class="header__menu__second">
-
-                
-                <router-link to='about'><img :src="shopcart" alt=""></router-link>
+                <img @click="OpenPopupShoppingCart" :src="shopcart" alt="">
             </div>
         </div>
 </div>
@@ -31,6 +31,11 @@ export default {
        logo:require('../assets/pics/kahovstan.svg.png'),
        shopcart: require('../assets/pics/shopping-cart.svg'),
        category: ["Доставка", "Хто є ми?"], 
+      }
+  },
+  methods:{
+      OpenPopupShoppingCart(){
+          this.$store.commit('openPopupShoppingCart')
       }
   }
        
@@ -122,5 +127,9 @@ a{
 
 .header .header__menu__second a {
     padding-left: 10px;
+}
+
+.header .header__menu__second img{
+    cursor: pointer;
 }
 </style>

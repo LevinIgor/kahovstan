@@ -1,9 +1,10 @@
 
 <template>
-    <div class="wrapper">
+    <div  class="wrapper"
+       v-bind:class="{'close-modal-shoppingCart':$store.getters.getIsShowPopupShoppingCart}">
          <div class="shopping-cart">
         <div class="back"> 
-           <button>
+           <button @click="closeModalShoppingCart">
                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="32" viewBox="0 0 17 32" icon="arrow4" class="default-modals-cart-continue-shopping-arrow"><path d="M2.2 16L16.7 1.5c.4-.4.4-.9 0-1.3s-.9-.4-1.3 0L.3 15.4c-.4.4-.4.9 0 1.3l15.2 15.1c.2.2.4.3.6.3.2 0 .5-.1.6-.3.4-.4.4-.9 0-1.3L2.2 16z"></path></svg>
                 <span> Продолжить покупки</span>
            </button>
@@ -12,7 +13,7 @@
         <div class="cart-title">Мои покупки</div>
         <div class="cart-lists">
             <div class="cart-list">
-                <div class="img"><img src="https://jolybell.com/storage/qvLbgGii4w.png?preview=&amp;width=192&amp;height=232" alt=""></div>
+                <div class="img"><picture><img src="https://jolybell.com/storage/qvLbgGii4w.png?preview=&amp;width=192&amp;height=232"></picture></div>
                
                 <div class="desc">
                     <div class="name">Name</div>
@@ -30,15 +31,69 @@
                             </div>
                         </div>
                     </div>
-                    <div class="price">23232</div>
+                    <div class="price">23232 грн.</div>
+                </div>
+            </div>
+              <div class="cart-list">
+                <div class="img"><picture><img src="https://jolybell.com/storage/qvLbgGii4w.png?preview=&amp;width=192&amp;height=232"></picture></div>
+               
+                <div class="desc">
+                    <div class="name">Name</div>
+                    <div class="type">
+                        <div class="type-top">Type</div>
+                        <div class="type-bottom">Stanok</div>
+                    </div>
+                    <div class="type">
+                        <div class="type-top">Количество</div>
+                        <div class="count-bottom">
+                            <div class="count-value">{{count}}</div>
+                            <div class="count-control">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" icon="plus" @click="countPlus"><path d="M9 4H5V0H4v4H0v1h4v4h1V5h4z"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" icon="minus" @click="countMinus"><path d="M9 4v1H0V4z"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price">23232 грн.</div>
+                </div>
+            </div>
+              <div class="cart-list">
+                <div class="img"><picture><img src="https://jolybell.com/storage/qvLbgGii4w.png?preview=&amp;width=192&amp;height=232"></picture></div>
+               
+                <div class="desc">
+                    <div class="name">Name</div>
+                    <div class="type">
+                        <div class="type-top">Type</div>
+                        <div class="type-bottom">Stanok</div>
+                    </div>
+                    <div class="type">
+                        <div class="type-top">Количество</div>
+                        <div class="count-bottom">
+                            <div class="count-value">{{count}}</div>
+                            <div class="count-control">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" icon="plus" @click="countPlus"><path d="M9 4H5V0H4v4H0v1h4v4h1V5h4z"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" icon="minus" @click="countMinus"><path d="M9 4v1H0V4z"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price">23232 грн.</div>
                 </div>
             </div>
         </div>
         <div class="cart-bottom">
-            <div class="summ"></div>
-            <div class="ship"></div>
-            <div class="total"></div>
-           <button>Оформить</button>
+            <div class="summ">
+                <span class="costTitle">Общая стоимость</span>
+                <span class="costValue">3232 грн.</span>
+            </div>
+            <div class="ship">
+                <span class="shipTitle">Доставка</span>
+                <span class="shipValue">9890 грн.</span>
+            </div>
+            <div class="total">
+                <span class="totalTitle">Итого</span>
+                <span class="totalValue">323232грн.</span>
+            </div>
+            <div class="buttonCheckout"><span>Оформить заказ</span></div>
+           
         </div>
     </div>
     </div>
@@ -52,7 +107,8 @@ export default {
   name: 'shopping-cart',
   data(){
       return{
-          count:1
+          count:1,
+          isShowModalShoppingCart:false
       }
   },
   methods:{
@@ -61,7 +117,12 @@ export default {
       },
       countMinus(){
           this.count--;
+      },
+
+      closeModalShoppingCart(){
+          this.$store.commit('closePopupShoppingCart')
       }
+
 
   }
   
@@ -73,18 +134,27 @@ export default {
 
 <style scoped>
 
+
+
 .wrapper{
-     position:fixed;
-    display:flex;
-    width:100%;
-    height:100%;
-    justify-content:center;
-    align-items:center;
-    background:rgba(0,0,0,.7);
-    z-index:100;
+overflow:auto;
+
+
+ position: fixed;
+
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.8); 
+    
+    z-index: 2;
+
 }
 
-
+.close-modal-shoppingCart{
+    display: none;
+}
 
 .shopping-cart{
     width: 370px;
@@ -93,6 +163,7 @@ export default {
     height: 100%;
     flex-direction: column;
     text-align: center;
+    z-index: 1;
 }
 
 .back{
@@ -105,6 +176,7 @@ export default {
 }  
 
 .back button{
+    cursor: pointer;
     position: relative;
     display: -webkit-box;
     display: flex;
@@ -148,16 +220,14 @@ export default {
 
 
 .cart-lists{
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    flex-direction: column;
-    width: 305px;
-    max-width: 90vw;
-    margin-bottom: 30px;
+       position: relative;
+    display: -webkit-box;
+   display: block;
+    width: 100%;
 }
 
 .img {
-    position: relative;
+  position: relative;
     flex-shrink: 0;
     display: -webkit-box;
     display: flex;
@@ -165,21 +235,19 @@ export default {
     justify-content: center;
     -webkit-box-align: center;
     align-items: center;
-    width: 144px;
+    width: 120px;
     height: 144px;
     padding: 11px;
-
     border-radius: 10px;
     border: 1px solid #e2e7ec;
 }
 
 .img img{
-        position: absolute;
+    
     width: 100%;
     height: 100%;
     -o-object-fit: contain;
     object-fit: contain;
-    padding-left: 30px;
 }
 
 .desc{
@@ -235,17 +303,109 @@ export default {
     width: 100%;
 }
 .cart-bottom{
-    -webkit-box-pack: center;
-    justify-content: center;
+   
+   text-align: center;
+   padding: 0 30px;
+   border: #000;
+   border-top: #000 2px solid;
+}
+
+.cart-bottom .summ{
+    padding-top: 50px;
+     display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
     width: 100%;
-    padding-top: 30px;
-    border-top: 2px solid #484848;
+}
+
+.cart-bottom .summ .costTitle{
+    font-size: 13px;
+    font-weight: 400;
+    color: #818d92;
+    text-transform: uppercase;
+}
+
+.cart-bottom .summ .costValue{
+    font-size: 16px;
+    font-weight: 800;
 }
 
 .price{
-        font-size: 16px;
+     font-size: 16px;
     font-weight: 400;
     text-align: right;
+    padding-right: 40px;
 }
 
+.ship{
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ship .shipTitle{
+     font-size: 13px;
+    font-weight: 400;
+    color: #818d92;
+    text-transform: uppercase;
+}
+
+.ship .shipValue{
+    font-size: 16px;
+    font-weight: 800;
+}
+
+
+.total{
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.totalTitle{
+    font-size: 13px;
+    font-weight: 400;
+    color: #818d92;
+    text-transform: uppercase;
+}
+
+.totalValue{
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.back span{
+    margin-left: 24px;
+}
+
+
+
+.buttonCheckout{
+    cursor: pointer;
+position: relative;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 277px;
+    height: 50px;
+    margin-top: 45px;
+    border-radius: 1000px;
+    background: #000;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.buttonCheckout span{
+    text-decoration: node;
+    border: none;
+}
 </style>

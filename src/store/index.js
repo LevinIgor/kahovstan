@@ -74,12 +74,20 @@ export default createStore({
                 description: 'Jukon is good'
 
             },
-        ]
+        ],
+        isShowPopupShoppingCart: true,
+        items: []
     },
     mutations: {
         countt(state) {
             state.count++;
             console.log(state.count)
+        },
+        closePopupShoppingCart(state) {
+            state.isShowPopupShoppingCart = true
+        },
+        openPopupShoppingCart(state) {
+            state.isShowPopupShoppingCart = false
         }
     },
     actions: {
@@ -90,6 +98,10 @@ export default createStore({
         getHeaderCategory(state) {
             return state.category
         },
+
+        getIsShowPopupShoppingCart(state) {
+            return state.isShowPopupShoppingCart
+        }
 
     },
     components: {

@@ -1,132 +1,173 @@
 <template>
-    <div class="v-catalog">
-
-       <div class="items">
-            <div class="category">
-
-                <h1>Category</h1>
-                
+  <div class="v-catalog">
+    <div class="item" v-for="(item, key) in this.$store.state.items" :key="key">
+      <div class="first">
+        <div class="blackout">
+          <div class="desc">
+            <div class="button-desc"><span>Подробнее</span></div>
+           
+          </div>
+          <div class="main">
+            <div class="price">{{ item.price }}GRN</div>
+            <div class="image">
+              <img :src="this.img" alt="" />
             </div>
-            <div class="container">
-                <div
-                v-for="item in this.$store.state.products" 
-                :key="item.name" 
-                class='item'>
-                    <div class="second">
-                        <p>{{item.description}}</p>
-                        <button @click="this.$store.commit('countt')">kljkljlk</button>
-                    </div>
-                    <div class="first"> <img src="Item.svg" alt="">
-                        <div class="name">{{item.name}}</div>
-                        <div class="price">{{item.price}}</div>
-                    </div>
-
-
-
-                </div>
-            </div>
-
-
-
+          </div>
         </div>
+      </div>
+      <div class="second">
+        <span
+          ><button>{{ item.name }}</button></span
+        >
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-export default{
-    name:'v-catalog',
-    data(){
-        return{
-        count: 30,
-        category: ["Деревообролюючі станки", "Металооброблюючі станки", "Слюсарні станки", "Лічільні інструменти", "Витратні матеріали", "Доставка", "Хто є ми?"],
-        currentPage: "",
-        products: [{
-                img: 3,
-                name: 'Jukon',
-                price: 40000,
-                key: 1,
-                description: 'Jukon is good'
+import firebase from "../../firebase";
 
-            },
-            {
-                img: 3,
-                name: 'Pavel',
-                price: 300,
-                key: 2,
-                description: 'Pavel is good'
-            },
-            {
-                img: 3,
-                name: 'Jopa',
-                price: 400000,
-                key: 3,
-                description: 'Jopa is good'
-            }
-        ]
-        }
+export default {
+  name: "v-catalog",
+  data() {
+    return {
+      count: 30,
+      items: [],
+      name: "pavel",
+      img: require("../assets/pics/IMG.png"),
+    };
+  },
+  methods: {
+    print() {
+      //   firebase.firestore().collection("cities")
+      //     .get()
+      //     .then((querySnapshot) => {
+      //       querySnapshot.forEach((doc) => {
+      //         console.log(doc.id, " => ", doc.data());
+      //       });
+      //     });
+      //   firebase
+      //     .firestore()
+      //     .collection("cities")
+      //     .get()
+      //     .then((doc) => {
+      //      doc.forEach((doc=>
+      //      this.$store.state.items.push(doc.data())
+      //      ))
+      //     })
+      //     .catch((error) => console.log(error));
+      //     console.log(this.$store.state.items)
+      //   docRef
+      //     .get()
+      //     .then((doc) => {
+      //       if (doc.exists) {
+      //         console.log("Document data:", doc.data());
+      //       } else {
+      //         // doc.data() will be undefined in this case
+      //         console.log("No such document!");
+      //       }
+      //     })
+      //     .catch((error) => {
+      //       console.log("Error getting document:", error);
+      //     });
     },
-    methods:{
-       
-        
+    addLocation() {
+      firebase
+        .firestore()
+        .collection("items")
+        .add({
+          name: "Moma",
+        })
+        .then(() => {})
+        .catch((error) => {
+          console.error("Error adding document: ", error);
+        });
     },
-    computed:mapState({
-       
-    })
-}
+  },
+};
 </script>
 
 <style>
-.container {
-    justify-content: center;
+.v-catalog {
+  height: 100%;
+  width: 90%;
+  margin: auto;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.items .second {
-    position: absolute;
+.item {
+  border-radius: 20px;
+  width: 40%;
+  justify-content: center;
+  margin: 20px;
+ 
 }
 
-.items .firts {
-    justify-content: center;
+.item .price {
+  z-index: 1000;
+  position: absolute;
+  border-radius: 1em 0 1em 0;
+  font-size: 16px;
+  background-color: black;
+  color: white;
+  padding: 5px;
 }
 
-.items .price {
-    text-align: center;
-    vertical-align: middle;
+.desc {
+  align-items: center;
+  z-index: 10000;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  font-weight: 700;
+  display: flex;
 }
 
-.items {
-    text-align: center;
-    padding-bottom: 40px;
-}
-
-.item img {
-    padding: 20px;
-    width: 240px;
-}
-
-.item .second {
-    visibility: hidden;
-    width: 33%;
-    min-height: 200px;
-    background-color: rgba(0, 0, 0, 0);
-    color: white;
-}
-
-.items .container {
+.button-desc{
+    position: relative;
+    display: -webkit-box;
     display: flex;
-    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 220px;
+    height: 50px;
+    border-radius: 100px;
+    background: #fff;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    -webkit-transition: opacity .5s;
+    transition: opacity .5s;
+    background-color: rgba(0, 0, 0, 0);
+}
+.first {
+  justify-content: center;
+  position: relative;
+}
+.image {
+  justify-content: center;
+  position: relative;
+  text-align: center;
 }
 
-.items .item {
-    width: 33%;
-    height: 200px;
-    box-shadow: 0 0 1px 1px rgba(22, 21, 21, 0.4);
+.image img {
+  width: 100%;
+  z-index: 1;
 }
 
-.item:hover .second {
-    visibility: visible;
-    background-color: rgba(0, 0, 0, .85);
-    transition: 0.5s;
-}
 
+
+.blackout :hover {
+ opacity: 1;
+  
+}
 </style>
