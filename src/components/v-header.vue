@@ -2,17 +2,16 @@
 <div class="v-header">
       <div class="header">
             <div class="header__logo">
-              <router-link :to="'/'"><img :src="logo" alt=""></router-link>
+              <router-link :to="'/catalog'"><img :src="logo" alt=""></router-link>
             </div>
             <div class="header__menu">
                
                 <ul>
                     <!-- <li v-for="(item, index) in this.$store.getters.getHeaderCategory" :key="index"><router-link :to="item">{{item}}</router-link> </li> -->
                    
-                     <li><router-link to='about'>Хто ми?</router-link></li>
-                    
-                     <li>  <router-link to="booking">booking</router-link></li>
-                     <li><router-link to="productCart">product cart</router-link></li>
+                     <li><router-link to='/about'>Хто ми?</router-link></li>
+                     <li> <router-link to="/booking">booking</router-link></li>
+                     <li><router-link to="/productCart">product cart</router-link></li>
                 </ul>
 
             </div>
@@ -84,7 +83,9 @@ a{
 .header .header__menu {
     color: honeydew;
     justify-content: space-between;
-    width: 100%;
+    width: 60%;
+    margin: auto;
+    
 }
 
 
@@ -99,7 +100,7 @@ a{
 
 .header .header__menu ul {
       text-transform: uppercase;
-    font-size: 12px;
+    font-size: 20px;
     text-decoration: none;
     color: white;
 
