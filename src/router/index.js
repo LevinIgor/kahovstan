@@ -3,7 +3,7 @@ import vAbout from '../components/pages/v-above'
 import vCatalog from '../components/pages/v-catalogPage'
 import vBooking from '../components/pages/v-booking'
 import vCarusele from '../components/carusele'
-import vShoppingCart from '../components/shopping-cart'
+
 import vProductCart from '../components/v-product-cart'
 
 const routes = [{
@@ -28,6 +28,10 @@ const routes = [{
     },
     {
         path: '/productCart',
+        component: vProductCart
+    },
+    {
+        path: '/catalog/:id',
         component: vProductCart
     }
 ]
