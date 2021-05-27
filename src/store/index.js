@@ -6,7 +6,7 @@ export default createStore({
         count: 10,
         isShowPopupShoppingCart: true,
         items: [],
-        selectProduct: [],
+        selectProduct: {},
     },
     mutations: {
         countt(state) {
@@ -27,6 +27,9 @@ export default createStore({
     getters: {
         GETITEMSDATA(state) {
             return state.items
+        },
+        GETSELECTITEM(state) {
+            return state.selectProduct
         },
         getIsShowPopupShoppingCart(state) {
             return state.isShowPopupShoppingCart

@@ -4,7 +4,7 @@ import vCatalog from '../components/pages/v-catalogPage'
 import vBooking from '../components/pages/v-booking'
 import vCarusele from '../components/carusele'
 
-import vProductCart from '../components/v-product-cart'
+import vProductCart from '../components/pages/v-product-cart'
 
 const routes = [{
         path: '/',

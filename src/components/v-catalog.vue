@@ -4,7 +4,18 @@
       class="item"
       v-for="(item, key) in this.$store.getters.GETITEMSDATA"
       :key="key"
-      @click="routerPush(item.name,item.price,item.desc,item.fullDesc,item.img,item.type,item.year,item.state)"
+      @click="
+        routerPush(
+          item.name,
+          item.price,
+          item.desc,
+          item.fullDesc,
+          item.img,
+          item.type,
+          item.year,
+          item.state
+        )
+      "
     >
       <div class="product-content">
         <div class="product-content-price">
@@ -13,16 +24,15 @@
         <div class="product-content-img">
           <img :src="item.img" alt="" />
         </div>
-        <div class="product-content-blackout">
-    
-        </div>
-         <button class="product-content-blackout-button"><span>Подробнее</span></button>
-      </div>
-      
-        <button class="product-name">
-          <span>{{ item.name }}</span>
+        <div class="product-content-blackout"></div>
+        <button class="product-content-blackout-button">
+          <span>Подробнее</span>
         </button>
-      
+      </div>
+
+      <button class="product-name">
+        <span>{{ item.name }}</span>
+      </button>
     </div>
   </div>
 </template>
@@ -86,19 +96,19 @@ export default {
           console.error("Error adding document: ", error);
         });
     },
-    routerPush(name,price,desc,fullDesc,img,type,year,state){
-      this.$store.state.selectProduct={
-        n:name,
-        p:price,
-        d:desc,
-        f:fullDesc,
-        i:img,
-        t:type,
-        y:year,
-        s:state
-      }
-     this.$router.push('/catalog/'+ name)
-    }
+    routerPush(name, price, desc, fullDesc, img, type, year, state) {
+      this.$store.state.selectProduct = {
+        n: name,
+        p: price,
+        d: desc,
+        f: fullDesc,
+        i: img,
+        t: type,
+        y: year,
+        s: state,
+      };
+      this.$router.push("/catalog/" + name);
+    },
   },
 };
 </script>
@@ -116,7 +126,7 @@ export default {
   height: 450px;
   width: 550px;
   position: relative;
- display: block;
+  display: block;
   margin: 20px;
 }
 
@@ -128,28 +138,28 @@ export default {
   z-index: 100;
   display: flex;
   padding: 0 1em;
- background: #000;
+  background: #000;
   color: #fff;
   -webkit-box-align: center;
   align-items: center;
   height: 2em;
- 
+
   white-space: nowrap;
 }
 
-.product-content-price span{
- margin: 0;
-    padding: 0;
-    border: 0;
-    font-family: Futura,sans-serif;
-    vertical-align: baseline;
-    font-size: 18px;
-    font-weight: 500;
+.product-content-price span {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: Futura, sans-serif;
+  vertical-align: baseline;
+  font-size: 18px;
+  font-weight: 500;
 }
 
-.product-content-img{
-height: 100%;
-width: 100%;
+.product-content-img {
+  height: 100%;
+  width: 100%;
   position: relative;
   -o-object-fit: contain;
   object-fit: contain;
@@ -157,99 +167,95 @@ width: 100%;
 .product-content-img img {
   width: 100%;
   height: 100%;
-  
 }
 
-.product-content{
+.product-content {
   height: 350px;
   width: 550px;
   position: relative;
-    overflow: hidden;
-    display: -webkit-box;
-    display: flex;
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
-    border-radius: 29px;
-    background: #fff;
-    align-content: center;
-
+  overflow: hidden;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  border-radius: 29px;
+  background: #fff;
+  align-content: center;
 }
-.product-content-blackout{
-position: absolute;
-background: #000;
+.product-content-blackout {
+  position: absolute;
+  background: #000;
   height: 100%;
   width: 100%;
   top: 0;
   opacity: 0;
 }
 
- .product-content-blackout-button{
+.product-content-blackout-button {
   position: absolute;
-    display: -webkit-box;
-    display: flex;
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
-    width: 220px;
-    height: 50px;
-    border-radius: 100px;
-    background: #fff;
-    font-size: 18px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 220px;
+  height: 50px;
+  border-radius: 100px;
+  background: #fff;
+  font-size: 18px;
   display: none;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    
-    
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
-.product-name{
- position: relative;
-    overflow: hidden;
-    width: 100%;
-    height: 58px;
-    margin-top: 20px;
-    border-radius: 100px;
-    cursor: pointer;
-    background: #fff;
-    border: none;
+.product-name {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 58px;
+  margin-top: 20px;
+  border-radius: 100px;
+  cursor: pointer;
+  background: #fff;
+  border: none;
 }
 
-.product-name span{
+.product-name span {
   position: absolute;
-    display: -webkit-box;
-    display: flex;
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    border-radius: inherit;
-    font-size: 20px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    letter-spacing: 6px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: inherit;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  letter-spacing: 6px;
 }
 
-.item:hover .product-content-blackout{
-  opacity: .5;
-  transition: .7s;
+.item:hover .product-content-blackout {
+  opacity: 0.5;
+  transition: 0.7s;
 }
 
-.item:hover .product-name{
+.item:hover .product-name {
   background: #000;
   color: #fff;
-  transition: .7s;
+  transition: 0.7s;
 }
 
-.item:hover .product-content-blackout-button{
+.item:hover .product-content-blackout-button {
   display: flex;
 }
 </style>
