@@ -11,7 +11,7 @@
                    
                      <li><router-link to='/about'>Хто ми?</router-link></li>
                      <li> <router-link to="/booking">booking</router-link></li>
-                     <li><router-link to="/productCart">product cart</router-link></li>
+                    
                 </ul>
 
             </div>

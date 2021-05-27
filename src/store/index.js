@@ -18,6 +18,12 @@ export default createStore({
         },
         openPopupShoppingCart(state) {
             state.isShowPopupShoppingCart = false
+        },
+        sortItemsPriceMaxMin(state) {
+            state.items.sort((a, b) => a.price < b.price ? 1 : -1);
+        },
+        sortItemsPriceMinMax(state) {
+            state.items.sort((a, b) => a.price > b.price ? 1 : -1);
         }
     },
     actions: {

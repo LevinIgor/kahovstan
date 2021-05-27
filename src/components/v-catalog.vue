@@ -1,6 +1,18 @@
 <template>
   <div class="v-catalog">
-    <div
+    <div class="catalog-title">
+      <span>Каталог</span>
+    </div>
+   <div class="filters">
+     <div class="filterSortPriceMaxMin">
+       <button @click="sortItemsPriceMaxMin">+</button>
+     </div>
+     <div class="filterSortPriceMinMax">
+       <button @click="sortItemsPriceMinMax">-</button>
+     </div>
+   </div>
+   <div class="catalogList">
+        <div
       class="item"
       v-for="(item, key) in this.$store.getters.GETITEMSDATA"
       :key="key"
@@ -34,6 +46,8 @@
         <span>{{ item.name }}</span>
       </button>
     </div>
+   </div>
+ 
   </div>
 </template>
 
@@ -109,6 +123,14 @@ export default {
       };
       this.$router.push("/catalog/" + name);
     },
+    sortItemsPriceMaxMin(){
+      this.$store.commit('sortItemsPriceMaxMin')
+
+    },
+    sortItemsPriceMinMax()
+    {
+      this.$store.commit('sortItemsPriceMinMax')
+    }
   },
 };
 </script>
@@ -118,10 +140,24 @@ export default {
   width: 90%;
   margin: auto;
   justify-content: center;
-  display: flex;
+ display: block;
   flex-wrap: wrap;
 }
-
+.catalogList{
+  display: flex;
+  flex-wrap: wrap;
+ justify-content: center;
+}
+.catalog-title{
+  text-align: center;
+  font-size: 40px;
+  font-weight: 900;
+  letter-spacing: 5px;
+  padding: 20px;
+}
+.filters{
+  display: flex;
+}
 .item {
   height: 450px;
   width: 550px;
