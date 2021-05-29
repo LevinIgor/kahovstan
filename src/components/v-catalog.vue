@@ -147,6 +147,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
  justify-content: center;
+ margin: auto;
 }
 .catalog-title{
   text-align: center;
@@ -154,6 +155,16 @@ export default {
   font-weight: 900;
   letter-spacing: 20px;
   padding: 60px;
+}
+
+@media (max-width:600px){
+  .catalog-title{
+    font-size: 30px;
+  }
+
+  .item{
+    margin: 10px;
+  }
 }
 .filters{
   display: flex;
@@ -164,7 +175,10 @@ export default {
   position: relative;
   display: block;
   margin: 20px;
+  text-align: center;
 }
+
+
 
 .product-content-price {
   position: absolute;
@@ -199,6 +213,7 @@ export default {
   position: relative;
   -o-object-fit: contain;
   object-fit: contain;
+  margin: auto;
 }
 .product-content-img img {
   width: 100%;
@@ -208,6 +223,7 @@ export default {
 .product-content {
   height: 350px;
   width: 550px;
+  margin: auto;
   position: relative;
   overflow: hidden;
   display: -webkit-box;
@@ -219,6 +235,20 @@ export default {
   border-radius: 29px;
   background: #fff;
   align-content: center;
+}
+
+@media (max-width: 600px){
+  .product-content{
+    height: 300px;
+    width: 400px;
+  }
+}
+
+@media (max-width: 400px){
+  .product-content{
+    height: 250px;
+    width: 250px;
+  }
 }
 .product-content-blackout {
   position: absolute;

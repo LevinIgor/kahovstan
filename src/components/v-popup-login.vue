@@ -72,11 +72,10 @@ export default {
 .popup-login-content {
   padding: 20px;
   position: absolute;
-  width: 40%;
   display: block;
   z-index: 110;
   left: 50%;
-  bottom: 50%;
+  bottom: 30%;
   transform: translate(-50%, -50%);
   border-radius: 50px;
   background: rgb(255, 252, 252);

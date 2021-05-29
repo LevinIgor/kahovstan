@@ -30,6 +30,7 @@ export default {
   data () {
       return {
        logo:require('../assets/pics/kahovstanV2.png'),
+       miniLogo:require('../assets/pics/K.S.png'),
        shopcart: require('../assets/pics/shopping-cart.svg'),
        category: ["Доставка", "Хто є ми?"], 
       }
@@ -44,6 +45,17 @@ export default {
 </script>
 
 <style>
+
+@media (max-width:700px){
+    .header__logo img{
+        width: 100%;
+    }
+
+    .header__menu li{
+        font-size:15px ;
+        width: 100%;
+    }
+}
 
 li{
     list-style-type: none;

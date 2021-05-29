@@ -2,6 +2,9 @@
   <div class="v-productEdit">
     <v-header></v-header>
     <div class="productEditContainer">
+      <div class="editTitle">
+        <span>Добавление товаров</span>
+      </div>
       <div class="productEditContent">
         <div class="name">
           <div class="name-title" id="EditTitle">
@@ -81,7 +84,7 @@
         </div>
         <div class="Product-edit-add">
           <button @click="addNewProduct" class="Product-edit-add-button">
-            Добавить
+            {{buttonName}}
           </button>
         </div>
       </div>
@@ -105,6 +108,7 @@ export default {
       state: "",
       year: 0,
       type: "",
+      buttonName:"Добавить"
     };
   },
   components: {
@@ -113,7 +117,7 @@ export default {
   },
   methods: {
     addNewProduct() {
-        
+      
     firebase.firestore().collection("items").doc().set({
     name: this.name,
     price:this.price,
@@ -125,22 +129,39 @@ export default {
     type:this.type
 })
 .then(() => {
-    console.log("Document successfully written!");
+   this.name="",
+   this.price=0,
+   this.desc="",
+   this.fullDesc="",
+   this.img="",
+   this.state="",
+   this.year=0,
+   this.type=""
 })
 .catch((error) => {
     console.error("Error writing document: ", error);
 });
+
+this.buttonName="Товар успешно добавлен"
+setTimeout(() => {
+  this.buttonName="Добавить"
+}, 3000);
     },
   },
 };
 </script>
 
 <style>
+.editTitle{
+  text-align: center;
+  font-size: 22px;
+  padding-bottom: 20px;
+}
 .productEditContainer {
   padding: 50px;
-  width: 90%;
+  
   margin: auto;
-  display: flex;
+  display: block;
   justify-content: center;
 }
 

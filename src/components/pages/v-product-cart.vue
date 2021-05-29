@@ -34,7 +34,7 @@
       </div>
 
       <div class="product-absolute-informations">
-        <pre>{{ $store.getters.GETSELECTITEM.f }}</pre>
+        <p>{{ $store.getters.GETSELECTITEM.f }}</p>
       </div>
     </div>
     <v-footer></v-footer>
@@ -87,6 +87,7 @@ letter-spacing: 5px;
 }
 .product-img {
   width: 100%;
+  height: 500px;
 }
 
 .product-img img {
@@ -103,6 +104,7 @@ letter-spacing: 5px;
     border-top: #ffffff 1px solid;
 }
 .product-price {
+  margin-top:20px ;
     margin-bottom: 20px;
   max-width: 90px;
   font-size: 20px;
@@ -145,7 +147,18 @@ letter-spacing: 5px;
 .product-absolute-informations{
     font-size: 20px;
     padding-top: 30px;
+    width: 70%;
+    flex-wrap: wrap;
+}
 
+.product-absolute-informations p{
+  flex-wrap: wrap;
+  word-wrap: wrap;
+}
+@media (max-width: 900px) {
+  .product-contant {
+    display: block;
+  }
 }
 
 </style>
