@@ -7,7 +7,7 @@ import vLogin from "../components/v-popup-login"
 import vProductCart from "../components/pages/v-product-cart";
 
 const routes = [{
-        path: "/catalog",
+        path: "/",
         name: "catalog",
         component: vCatalog,
     },

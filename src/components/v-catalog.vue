@@ -3,51 +3,50 @@
     <div class="catalog-title">
       <span>Каталог</span>
     </div>
-   <div class="filters">
-     <div class="filterSortPriceMaxMin">
-       <button @click="sortItemsPriceMaxMin">+</button>
-     </div>
-     <div class="filterSortPriceMinMax">
-       <button @click="sortItemsPriceMinMax">-</button>
-     </div>
-   </div>
-   <div class="catalogList">
-        <div
-      class="item"
-      v-for="(item, key) in this.$store.getters.GETITEMSDATA"
-      :key="key"
-      @click="
-        routerPush(
-          item.name,
-          item.price,
-          item.desc,
-          item.fullDesc,
-          item.img,
-          item.type,
-          item.year,
-          item.state
-        )
-      "
-    >
-      <div class="product-content">
-        <div class="product-content-price">
-          <span>{{ item.price }} GNR</span>
+    <div class="filters">
+      <div class="filterSortPriceMaxMin">
+        <button @click="sortItemsPriceMaxMin">+</button>
+      </div>
+      <div class="filterSortPriceMinMax">
+        <button @click="sortItemsPriceMinMax">-</button>
+      </div>
+    </div>
+    <div class="catalogList">
+      <div
+        class="item"
+        v-for="(item, key) in this.$store.getters.GETITEMSDATA"
+        :key="key"
+        @click="
+          routerPush(
+            item.name,
+            item.price,
+            item.desc,
+            item.fullDesc,
+            item.img,
+            item.type,
+            item.year,
+            item.state
+          )
+        "
+      >
+        <div class="product-content">
+          <div class="product-content-price">
+            <span>{{ item.price }} GNR</span>
+          </div>
+          <div class="product-content-img">
+            <img :src="item.img" alt="" />
+          </div>
+          <div class="product-content-blackout"></div>
+          <button class="product-content-blackout-button">
+            <span>Подробнее</span>
+          </button>
         </div>
-        <div class="product-content-img">
-          <img :src="item.img" alt="" />
-        </div>
-        <div class="product-content-blackout"></div>
-        <button class="product-content-blackout-button">
-          <span>Подробнее</span>
+
+        <button class="product-name">
+          <span>{{ item.name }}</span>
         </button>
       </div>
-
-      <button class="product-name">
-        <span>{{ item.name }}</span>
-      </button>
     </div>
-   </div>
- 
   </div>
 </template>
 
@@ -111,7 +110,7 @@ export default {
         });
     },
     routerPush(name, price, desc, fullDesc, img, type, year, state) {
-      this.$store.state.selectProduct = {
+      var selectP = {
         n: name,
         p: price,
         d: desc,
@@ -121,16 +120,15 @@ export default {
         y: year,
         s: state,
       };
+      localStorage.setItem("item", JSON.stringify(selectP));
       this.$router.push("/catalog/" + name);
     },
-    sortItemsPriceMaxMin(){
-      this.$store.commit('sortItemsPriceMaxMin')
-
+    sortItemsPriceMaxMin() {
+      this.$store.commit("sortItemsPriceMaxMin");
     },
-    sortItemsPriceMinMax()
-    {
-      this.$store.commit('sortItemsPriceMinMax')
-    }
+    sortItemsPriceMinMax() {
+      this.$store.commit("sortItemsPriceMinMax");
+    },
   },
 };
 </script>
@@ -140,16 +138,16 @@ export default {
   width: 90%;
   margin: auto;
   justify-content: center;
- display: block;
+  display: block;
   flex-wrap: wrap;
 }
-.catalogList{
+.catalogList {
   display: flex;
   flex-wrap: wrap;
- justify-content: center;
- margin: auto;
+  justify-content: center;
+  margin: auto;
 }
-.catalog-title{
+.catalog-title {
   text-align: center;
   font-size: 50px;
   font-weight: 900;
@@ -157,28 +155,28 @@ export default {
   padding: 60px;
 }
 
-@media (max-width:600px){
-  .catalog-title{
+@media (max-width: 600px) {
+  .catalog-title {
     font-size: 30px;
+    letter-spacing: 4px;
+    padding: 10px;
   }
 
-  .item{
-    margin: 10px;
+  .item {
+    margin-bottom: 10px;
+    height: auto;
   }
 }
-.filters{
+.filters {
   display: flex;
 }
 .item {
-  height: 450px;
   width: 550px;
   position: relative;
   display: block;
   margin: 20px;
   text-align: center;
 }
-
-
 
 .product-content-price {
   position: absolute;
@@ -237,15 +235,15 @@ export default {
   align-content: center;
 }
 
-@media (max-width: 600px){
-  .product-content{
+@media (max-width: 600px) {
+  .product-content {
     height: 300px;
     width: 400px;
   }
 }
 
-@media (max-width: 400px){
-  .product-content{
+@media (max-width: 400px) {
+  .product-content {
     height: 250px;
     width: 250px;
   }

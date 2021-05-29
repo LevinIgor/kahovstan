@@ -2,39 +2,41 @@
   <div class="v-product-cart">
     <v-header></v-header>
     <div class="product-cart">
-      <div class="product-title">{{ $store.getters.GETSELECTITEM.n }}</div>
+      <div class="product-title">{{ selectItem.n }}</div>
       <div class="product-contant">
         <div class="product-img">
-          <img :src="$store.getters.GETSELECTITEM.i" alt="" />
+          <img :src="selectItem.i" alt="" />
         </div>
 
         <div class="product-informations">
           <div class="product-price">
-            <span>{{ $store.getters.GETSELECTITEM.p }} UAH</span>
+            <span>{{ selectItem.p }} UAH</span>
           </div>
           <div class="product-desc" id="t">
-            <p>{{ $store.getters.GETSELECTITEM.d }}</p>
+            <p>{{ selectItem.d }}</p>
           </div>
           <div class="product-year" id="t">
             <div class="product-year-title">Год выпуска: </div>
-            {{ $store.getters.GETSELECTITEM.y }}г.
+            {{ selectItem.y }}г.
           </div>
           <div class="product-state" id="t">
               <div class="product-state-title">Состояние: </div>
-              {{ $store.getters.GETSELECTITEM.s }}</div>
+              {{ selectItem.s }}</div>
           <div class="product-type" id="t">
               <div class="product-type-title">
                   Тип: 
               </div>
-              {{ $store.getters.GETSELECTITEM.t }}</div>
-          
-            <button class="product-button-addToShoppingCart"><span>Добавить в корзину</span></button>
+              {{selectItem.t }}</div>
+          <div class="addCast">
+ <button class="product-button-addToShoppingCart"><span>Добавить в корзину</span></button>
+          </div>
+           
           
         </div>
       </div>
 
       <div class="product-absolute-informations">
-        <p>{{ $store.getters.GETSELECTITEM.f }}</p>
+        <p>{{ selectItem.f }}</p>
       </div>
     </div>
     <v-footer></v-footer>
@@ -46,11 +48,22 @@ import vHeader from "../v-header";
 import VFooter from "../v-footer.vue";
 
 export default {
-  data() {},
+  data() {
+    return{
+      selectItem:{}
+    }
+  },
   components: {
     vHeader,
     VFooter,
   },
+  mounted(){
+   
+  },
+  created(){
+this.selectItem = JSON.parse(localStorage.item)
+  
+  }
 };
 </script>
 
@@ -64,6 +77,7 @@ flex-wrap: wrap;
 letter-spacing: 5px;
 }
 .v-product-cart {
+  overflow-x: hidden;
   color: #fff;
   background: #111113;
 }
@@ -74,7 +88,7 @@ letter-spacing: 5px;
 .product-contant {
   background: #111113;
   display: flex;
-
+padding: 10px;
   margin: auto;
 }
 
@@ -87,16 +101,18 @@ letter-spacing: 5px;
 }
 .product-img {
   width: 100%;
-  height: 500px;
+  
+  height: auto;
 }
 
 .product-img img {
   height: 100%;
   width: 100%;
+  max-height: 500px;
 }
 
 .product-informations {
-  margin-left: 30px;
+  padding-left: 10px;
   width: 100%;
   text-align: left;
 }
@@ -144,6 +160,12 @@ letter-spacing: 5px;
     letter-spacing: 2px;
     text-transform: uppercase;
 }
+
+.addCast{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
 .product-absolute-informations{
     font-size: 20px;
     padding-top: 30px;
@@ -159,6 +181,21 @@ letter-spacing: 5px;
   .product-contant {
     display: block;
   }
+  .product-button-addToShoppingCart{
+    width: 40%;
+  }
+}
+
+@media (max-width:500px) {
+  #t{
+    font-size: 15px;
+    letter-spacing: 3px;
+  }
+  .product-button-addToShoppingCart{
+    font-size: 12px;
+  }
+
+  
 }
 
 </style>

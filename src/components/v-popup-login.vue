@@ -135,4 +135,10 @@ export default {
 .inputInvalidAuth {
   border: red 2px solid;
 }
+
+@media (max-width:600px) {
+  .invalid{
+    font-size: 12px;
+  }
+}
 </style>

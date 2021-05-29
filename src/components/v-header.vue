@@ -2,18 +2,17 @@
 <div class="v-header">
       <div class="header">
             <div class="header__logo">
-              <router-link :to="'/catalog'"><img :src="logo" alt=""></router-link>
+              <router-link :to="'/'"><img :src="logo" alt=""></router-link>
             </div>
             <div class="header__menu">
                
                 <ul>
                     <!-- <li v-for="(item, index) in this.$store.getters.getHeaderCategory" :key="index"><router-link :to="item">{{item}}</router-link> </li> -->
                    
-                     <li><router-link to='/about'>О нас</router-link></li>
-                     <li> <router-link to="/booking">Доставка</router-link></li>
+                     <li><router-link to='/about'>FAQ</router-link></li>
+                     <li> <router-link to="/booking">Статус заказа</router-link></li>
                     <!-- <li><router-link to="/catalog/edit">Редактор</router-link></li> -->
                   
-                    
                 </ul>
 
             </div>
@@ -50,10 +49,22 @@ export default {
     .header__logo img{
         width: 100%;
     }
+    .header__menu{
+        width: 100%;
+    }
 
     .header__menu li{
         font-size:15px ;
+    
+    }
+
+    .header__menu ul{
+        justify-content: space-between;
         width: 100%;
+    }
+
+    .header{
+        padding: 0;
     }
 }
 
@@ -68,7 +79,7 @@ a{
 }
 
 .header {
-    padding: 10px 40px;
+   
     height: 100%;
     width: auto;
     background-color: black;
@@ -96,7 +107,6 @@ a{
 
 .header .header__menu {
     color: honeydew;
-    justify-content: space-between;
     width: 60%;
     margin: auto;
     
@@ -117,7 +127,6 @@ a{
     font-size: 20px;
     text-decoration: none;
     color: white;
-
     display: flex;
     padding: 0px 10px 0px 10px;
     justify-content: space-between;
