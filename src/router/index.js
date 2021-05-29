@@ -3,7 +3,7 @@ import vAbout from "../components/pages/v-above";
 import vCatalog from "../components/pages/v-catalogPage";
 import vBooking from "../components/pages/v-booking";
 import vEdit from "../components/pages/v-productEdit";
-
+import vLogin from "../components/v-popup-login"
 import vProductCart from "../components/pages/v-product-cart";
 
 const routes = [{
@@ -29,6 +29,10 @@ const routes = [{
         path: "/catalog/edit",
         component: vEdit,
     },
+    {
+        path: "/auth",
+        component: vLogin
+    }
 ];
 
 const router = createRouter({

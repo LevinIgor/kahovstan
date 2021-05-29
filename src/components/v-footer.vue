@@ -3,7 +3,7 @@
      <div class="footer">
             <div class="menu">
                 <ul>
-                    <li v-for="item in this.$store.state.category" :key="item.id" @click="$router.push()"> <a href="">{{item}}</a> </li>
+                     <li><router-link to="/auth">auth</router-link> </li>
                 </ul>
             </div>
 
@@ -46,17 +46,21 @@ export default{
     width: auto;
     background-color: black;
 }
-
+.footer .menu{
+    width: 60%;
+    margin: auto;
+}
 .footer .menu li {
     text-transform: uppercase;
-    font-size: 10;
+     font-size: 20px;
 }
 
 .footer .menu ul {
+   
     padding: 0;
     display: flex;
     margin: 0;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .footer .contact {
@@ -72,9 +76,6 @@ export default{
 .footer .copyright {
     color: white;
     text-align: right;
-}
-.footer a{
-    font-size: 12px;
 }
 
 </style>

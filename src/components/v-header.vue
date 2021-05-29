@@ -11,7 +11,8 @@
                    
                      <li><router-link to='/about'>О нас</router-link></li>
                      <li> <router-link to="/booking">Доставка</router-link></li>
-                    <li><router-link to="/catalog/edit">Редактор</router-link></li>
+                    <!-- <li><router-link to="/catalog/edit">Редактор</router-link></li> -->
+                  
                     
                 </ul>
 
