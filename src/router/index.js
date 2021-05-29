@@ -1,44 +1,39 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import vAbout from '../components/pages/v-above'
-import vCatalog from '../components/pages/v-catalogPage'
-import vBooking from '../components/pages/v-booking'
-import vCarusele from '../components/carusele'
+import { createRouter, createWebHistory } from "vue-router";
+import vAbout from "../components/pages/v-above";
+import vCatalog from "../components/pages/v-catalogPage";
+import vBooking from "../components/pages/v-booking";
+import vEdit from "../components/pages/v-productEdit";
 
-import vProductCart from '../components/pages/v-product-cart'
+import vProductCart from "../components/pages/v-product-cart";
 
 const routes = [{
-        path: '/',
-        name: 'catalog',
-        component: vCatalog
+        path: "/catalog",
+        name: "catalog",
+        component: vCatalog,
     },
     {
-        path: '/about',
-        name: 'about',
-        component: vAbout
+        path: "/about",
+        name: "about",
+        component: vAbout,
     },
     {
-        path: '/:id',
-        component: vCatalog
+        path: "/booking",
+        component: vBooking,
     },
 
-
     {
-        path: '/booking',
-        component: vBooking
+        path: "/catalog/:id",
+        component: vProductCart,
     },
     {
-        path: '/productCart',
-        component: vProductCart
+        path: "/catalog/edit",
+        component: vEdit,
     },
-    {
-        path: '/catalog/:id',
-        component: vProductCart
-    }
-]
+];
 
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
-    routes
-})
+    routes,
+});
 
-export default router
+export default router;

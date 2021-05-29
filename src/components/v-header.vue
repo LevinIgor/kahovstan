@@ -9,8 +9,9 @@
                 <ul>
                     <!-- <li v-for="(item, index) in this.$store.getters.getHeaderCategory" :key="index"><router-link :to="item">{{item}}</router-link> </li> -->
                    
-                     <li><router-link to='/about'>Хто ми?</router-link></li>
-                     <li> <router-link to="/booking">booking</router-link></li>
+                     <li><router-link to='/about'>О нас</router-link></li>
+                     <li> <router-link to="/booking">Доставка</router-link></li>
+                    <li><router-link to="/catalog/edit">Редактор</router-link></li>
                     
                 </ul>
 
@@ -27,7 +28,7 @@ export default {
   name: 'v-header',
   data () {
       return {
-       logo:require('../assets/pics/kahovstan.svg.png'),
+       logo:require('../assets/pics/kahovstanV2.png'),
        shopcart: require('../assets/pics/shopping-cart.svg'),
        category: ["Доставка", "Хто є ми?"], 
       }

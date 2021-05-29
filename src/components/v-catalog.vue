@@ -150,10 +150,10 @@ export default {
 }
 .catalog-title{
   text-align: center;
-  font-size: 40px;
+  font-size: 50px;
   font-weight: 900;
-  letter-spacing: 5px;
-  padding: 20px;
+  letter-spacing: 20px;
+  padding: 60px;
 }
 .filters{
   display: flex;
