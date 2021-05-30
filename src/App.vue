@@ -14,12 +14,6 @@ export default {
   },
   data() {},
   methods: {
-    recordToLocal() {
-      localStorage.setItem(
-        "items",
-        JSON.stringify(this.$store.getters.GETITEMSDATA)
-      );
-    },
   },
   mounted() {
     firebase
@@ -31,11 +25,7 @@ export default {
       })
       .catch((error) => console.log(error));
 
-    // setTimeout(() => {
-    //  this.recordToLocal();
-    // }, 3000);
-
-    //  var n = JSON.parse(localStorage.getItem("items"))
+    
   },
 };
 </script>

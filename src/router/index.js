@@ -10,6 +10,11 @@ const routes = [{
         path: "/",
         name: "catalog",
         component: vCatalog,
+        meta: { title: "Kahovstan" }
+    },
+    {
+        path: "/catalog",
+        component: vCatalog
     },
     {
         path: "/about",
@@ -40,4 +45,7 @@ const router = createRouter({
     routes,
 });
 
+router.beforeEach(() => {
+    document.title = "KAHOVSTAN"
+});
 export default router;
