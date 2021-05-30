@@ -111,7 +111,7 @@ export default {
     return {
       count: 1,
       isShowModalShoppingCart: false,
-      editShopCart: [],
+      editShopCart: [JSON.parse(localStorage.shoppingCart)],
       summ: 0,
       shopping: 0,
       total: 0,
@@ -167,21 +167,20 @@ export default {
       localStorage.setItem("shoppingCart", JSON.stringify(this.editShopCart));
     },
 
-    booking(){
-      this.$store.commit("closePopupShoppingCart")
-      this.$router.push("/booking")
-      
-    }
+    booking() {
+      this.$store.commit("closePopupShoppingCart");
+      this.$router.push("/booking");
+    },
   },
-  mounted() {
-    var shoppingCart = JSON.parse(localStorage.shoppingCart);
+
+  created() {
+   var shoppingCart = JSON.parse(localStorage.shoppingCart);
     this.editShopCart = shoppingCart.filter((item) => item.name !== "");
     this.editShopCart.forEach((item) => {
-      this.summ = this.summ + parseInt(item.p) * item.c;
+    this.summ = this.summ + parseInt(item.p) * item.c;
     });
 
     this.shopping = (this.summ * 40) / 100;
-
     this.total = this.shopping + this.summ;
   },
 };
@@ -271,7 +270,7 @@ export default {
   -webkit-box-align: center;
   align-items: center;
   width: 100%;
-
+  padding-left: 10px;
   font-size: 38px;
   font-weight: 400;
   line-height: 108px;

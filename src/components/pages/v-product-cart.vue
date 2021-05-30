@@ -1,6 +1,8 @@
 <template>
   <div class="v-product-cart">
     <v-header></v-header>
+    <vModalShopingCart :v-if="$store.getters.getIsShowPopupShoppingCart">
+    </vModalShopingCart>
     <div class="product-cart">
       <div class="product-title">{{ selectItem.n }}</div>
       <div class="product-contant">
@@ -29,7 +31,7 @@
           </div>
           <div class="addCast">
             <button
-              @click="addToShoppingCart"
+              @click="addToShoppingCart()"
               class="product-button-addToShoppingCart"
             >
               <span>Добавить в корзину</span>
@@ -49,7 +51,7 @@
 <script>
 import vHeader from "../v-header";
 import VFooter from "../v-footer.vue";
-
+import vModalShopingCart from "../shopping-cart";
 export default {
   data() {
     return {
@@ -59,18 +61,14 @@ export default {
   components: {
     vHeader,
     VFooter,
+    vModalShopingCart,
   },
   methods: {
     addToShoppingCart() {
       var selectProduct = JSON.parse(localStorage.item);
       var isContain = false;
       var shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
-      var obj = [
-        {
-          name: "",
-        },
-        { name: "" },
-      ];
+      var obj = [];
       if (shoppingCart == undefined) {
         obj.push(selectProduct);
         localStorage.setItem("shoppingCart", JSON.stringify(obj));
@@ -88,7 +86,6 @@ export default {
           localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
         } else {
           shoppingCart.push(selectProduct);
-
           localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
         }
       }
@@ -118,12 +115,13 @@ export default {
 }
 .v-product-cart {
   overflow-x: hidden;
-  color: #fff;
+
   background: #111113;
 }
 .product-cart {
   width: 95%;
   margin: auto;
+  color: #fff;
 }
 .product-contant {
   background: #111113;
@@ -138,6 +136,13 @@ export default {
   font-size: 40px;
   font-weight: 600;
   padding: 30px;
+}
+
+@media (max-width: 600px) {
+  .product-title {
+    font-size: 20px;
+    letter-spacing: 10px;
+  }
 }
 .product-img {
   width: 100%;
