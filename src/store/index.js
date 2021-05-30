@@ -7,6 +7,7 @@ export default createStore({
         isShowPopupShoppingCart: true,
         items: [],
         selectProduct: {},
+        shoppingCart: []
     },
     mutations: {
         countt(state) {
@@ -24,7 +25,8 @@ export default createStore({
         },
         sortItemsPriceMinMax(state) {
             state.items.sort((a, b) => a.price > b.price ? 1 : -1);
-        }
+        },
+
     },
     actions: {
 
@@ -39,6 +41,9 @@ export default createStore({
         },
         getIsShowPopupShoppingCart(state) {
             return state.isShowPopupShoppingCart
+        },
+        GET_SHOPPING_CART(state) {
+            return state.shoppingCart
         }
 
     },

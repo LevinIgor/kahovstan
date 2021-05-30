@@ -26,25 +26,35 @@
       </div>
       <div class="cart-title">Мои покупки</div>
       <div class="cart-lists">
-        
-        <div class="cart-list">
+        <div class="cart-list" v-for="item in editShopCart" :key="item.n">
           <div class="img">
-            <picture
-              ><img
-                src="https://jolybell.com/storage/qvLbgGii4w.png?preview=&amp;width=192&amp;height=232"
-            /></picture>
+            <div class="deleteProduct" @click="deleteProduct(item.n)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="7"
+                height="7"
+                viewBox="0 0 7 7"
+                icon="cross2"
+              >
+                <path
+                  d="M7 .6L6.4 0 3.5 2.9.6 0 0 .6l2.9 2.9L0 6.4l.6.6 2.9-2.9L6.4 7l.6-.6-2.9-2.9z"
+                ></path>
+              </svg>
+            </div>
+
+            <img :src="item.i" />
           </div>
 
           <div class="desc">
-            <div class="name">Name</div>
+            <div class="name">{{ item.n }}</div>
             <div class="type">
               <div class="type-top">Type</div>
-              <div class="type-bottom">Stanok</div>
+              <div class="type-bottom">{{ item.t }}</div>
             </div>
             <div class="type">
               <div class="type-top">Количество</div>
               <div class="count-bottom">
-                <div class="count-value">{{ count }}</div>
+                <div class="count-value">{{ item.c }}</div>
                 <div class="count-control">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +62,7 @@
                     height="9"
                     viewBox="0 0 9 9"
                     icon="plus"
-                    @click="countPlus"
+                    @click="countPlus(item.n)"
                   >
                     <path d="M9 4H5V0H4v4H0v1h4v4h1V5h4z"></path>
                   </svg>
@@ -62,76 +72,33 @@
                     height="9"
                     viewBox="0 0 9 9"
                     icon="minus"
-                    @click="countMinus"
+                    @click="countMinus(item.n)"
                   >
                     <path d="M9 4v1H0V4z"></path>
                   </svg>
                 </div>
               </div>
             </div>
-            <div class="price">23232 грн.</div>
-          </div>
-        </div>
-        <div class="cart-list">
-          <div class="img">
-            <picture
-              ><img
-                src="https://jolybell.com/storage/qvLbgGii4w.png?preview=&amp;width=192&amp;height=232"
-            /></picture>
-          </div>
-
-          <div class="desc">
-            <div class="name">Name</div>
-            <div class="type">
-              <div class="type-top">Type</div>
-              <div class="type-bottom">Stanok</div>
-            </div>
-            <div class="type">
-              <div class="type-top">Количество</div>
-              <div class="count-bottom">
-                <div class="count-value">{{ count }}</div>
-                <div class="count-control">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="9"
-                    height="9"
-                    viewBox="0 0 9 9"
-                    icon="plus"
-                    @click="countPlus"
-                  >
-                    <path d="M9 4H5V0H4v4H0v1h4v4h1V5h4z"></path>
-                  </svg>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="9"
-                    height="9"
-                    viewBox="0 0 9 9"
-                    icon="minus"
-                    @click="countMinus"
-                  >
-                    <path d="M9 4v1H0V4z"></path>
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <div class="price">23232 грн.</div>
+            <div class="price">{{ item.p }} UAH</div>
           </div>
         </div>
       </div>
       <div class="cart-bottom">
         <div class="summ">
           <span class="costTitle">Общая стоимость</span>
-          <span class="costValue">3232 грн.</span>
+          <span class="costValue">{{ summ }}</span>
         </div>
         <div class="ship">
           <span class="shipTitle">Доставка</span>
-          <span class="shipValue">9890 грн.</span>
+          <span class="shipValue">{{ shopping }} UAH</span>
         </div>
         <div class="total">
           <span class="totalTitle">Итого</span>
-          <span class="totalValue">323232грн.</span>
+          <span class="totalValue">{{ total }} UAH</span>
         </div>
-        <div class="buttonCheckout"><span>Оформить заказ</span></div>
+        <button @click="booking" class="buttonCheckout">
+          <span>Оформить заказ</span>
+        </button>
       </div>
     </div>
   </div>
@@ -144,35 +111,118 @@ export default {
     return {
       count: 1,
       isShowModalShoppingCart: false,
+      editShopCart: [],
+      summ: 0,
+      shopping: 0,
+      total: 0,
     };
   },
   methods: {
-    countPlus() {
-      this.count++;
+    countPlus(name) {
+      this.editShopCart.forEach((item) => {
+        if (item.n == name) {
+          item.c++;
+          localStorage.setItem(
+            "shoppingCart",
+            JSON.stringify(this.editShopCart)
+          );
+        }
+      });
+
+      this.refresh();
     },
-    countMinus() {
-      this.count--;
+    countMinus(name) {
+      this.editShopCart.forEach((item) => {
+        if (item.n == name) {
+          if (item.c > 1) {
+            item.c--;
+            localStorage.setItem(
+              "shoppingCart",
+              JSON.stringify(this.editShopCart)
+            );
+            this.refresh();
+          }
+        }
+      });
+    },
+    refresh() {
+      this.summ = 0;
+      this.editShopCart.forEach((item) => {
+        this.summ = this.summ + parseInt(item.p) * item.c;
+      });
+
+      this.shopping = (this.summ * 40) / 100;
+
+      this.total = this.shopping + this.summ;
+
+      var shoppingCart = JSON.parse(localStorage.shoppingCart);
+      this.editShopCart = shoppingCart.filter((item) => item.name !== "");
     },
 
     closeModalShoppingCart() {
       this.$store.commit("closePopupShoppingCart");
     },
+    deleteProduct(name) {
+      this.editShopCart = this.editShopCart.filter((item) => item.n !== name);
+      localStorage.setItem("shoppingCart", JSON.stringify(this.editShopCart));
+    },
+
+    booking(){
+      this.$store.commit("closePopupShoppingCart")
+      this.$router.push("/booking")
+      
+    }
+  },
+  mounted() {
+    var shoppingCart = JSON.parse(localStorage.shoppingCart);
+    this.editShopCart = shoppingCart.filter((item) => item.name !== "");
+    this.editShopCart.forEach((item) => {
+      this.summ = this.summ + parseInt(item.p) * item.c;
+    });
+
+    this.shopping = (this.summ * 40) / 100;
+
+    this.total = this.shopping + this.summ;
   },
 };
 </script>
 
 <style scoped>
 .wrapper {
-  overflow: auto;
-  position: fixed;
-
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  bottom: 0;
+  right: 0;
   background: rgba(0, 0, 0, 0.8);
 
   z-index: 2;
+}
+
+.deleteProduct {
+  position: absolute;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 23px;
+  height: 23px;
+  left: 0;
+  top: -8px;
+  border-radius: 50%;
+  border: 1px solid #9ca4ab;
+  background: #fff;
+  cursor: pointer;
+}
+
+.deleteProduct svg {
+  width: 7px;
+  height: 7px;
+  fill: #959da5;
 }
 
 .close-modal-shoppingCart {
@@ -180,9 +230,10 @@ export default {
 }
 
 .shopping-cart {
+  position: absolute;
   width: 370px;
   background-color: white;
-  margin: auto 0 auto auto;
+  right: 0;
   height: 100%;
   flex-direction: column;
   text-align: center;
@@ -190,7 +241,7 @@ export default {
 }
 
 .back {
-  height: 75px;
+  height: 5%;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -220,7 +271,7 @@ export default {
   -webkit-box-align: center;
   align-items: center;
   width: 100%;
-  padding: 0 18px;
+
   font-size: 38px;
   font-weight: 400;
   line-height: 108px;
@@ -252,18 +303,18 @@ export default {
   justify-content: center;
   -webkit-box-align: center;
   align-items: center;
-  width: 120px;
+  width: 40%;
   height: 144px;
   padding: 11px;
   border-radius: 10px;
   border: 1px solid #e2e7ec;
+  -o-object-fit: contain;
+  object-fit: contain;
 }
 
 .img img {
   width: 100%;
   height: 100%;
-  -o-object-fit: contain;
-  object-fit: contain;
 }
 
 .desc {
@@ -307,7 +358,6 @@ export default {
 }
 
 .count-bottom {
-  display: -webkit-box;
   display: flex;
   -webkit-box-align: center;
   align-items: center;

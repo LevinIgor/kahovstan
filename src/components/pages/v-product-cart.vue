@@ -16,22 +16,25 @@
             <p>{{ selectItem.d }}</p>
           </div>
           <div class="product-year" id="t">
-            <div class="product-year-title">Год выпуска: </div>
+            <div class="product-year-title">Год выпуска:</div>
             {{ selectItem.y }}г.
           </div>
           <div class="product-state" id="t">
-              <div class="product-state-title">Состояние: </div>
-              {{ selectItem.s }}</div>
-          <div class="product-type" id="t">
-              <div class="product-type-title">
-                  Тип: 
-              </div>
-              {{selectItem.t }}</div>
-          <div class="addCast">
- <button class="product-button-addToShoppingCart"><span>Добавить в корзину</span></button>
+            <div class="product-state-title">Состояние:</div>
+            {{ selectItem.s }}
           </div>
-           
-          
+          <div class="product-type" id="t">
+            <div class="product-type-title">Тип:</div>
+            {{ selectItem.t }}
+          </div>
+          <div class="addCast">
+            <button
+              @click="addToShoppingCart"
+              class="product-button-addToShoppingCart"
+            >
+              <span>Добавить в корзину</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -49,32 +52,69 @@ import VFooter from "../v-footer.vue";
 
 export default {
   data() {
-    return{
-      selectItem:{}
-    }
+    return {
+      selectItem: {},
+    };
   },
   components: {
     vHeader,
     VFooter,
   },
-  mounted(){
-   
+  methods: {
+    addToShoppingCart() {
+      var selectProduct = JSON.parse(localStorage.item);
+      var isContain = false;
+      var shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
+      var obj = [
+        {
+          name: "",
+        },
+        { name: "" },
+      ];
+      if (shoppingCart == undefined) {
+        obj.push(selectProduct);
+        localStorage.setItem("shoppingCart", JSON.stringify(obj));
+      } else {
+        shoppingCart.forEach((item) => {
+          if (item.n == this.selectItem.n) {
+            item.c++;
+            console.log("Contain");
+            isContain = true;
+            return;
+          }
+        });
+
+        if (isContain) {
+          localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+        } else {
+          shoppingCart.push(selectProduct);
+
+          localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+        }
+      }
+
+      this.$swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Товар добавлен в корзину",
+        showConfirmButton: false,
+        timer: 1000,
+      });
+    },
   },
-  created(){
-this.selectItem = JSON.parse(localStorage.item)
-  
-  }
+  created() {
+    this.selectItem = JSON.parse(localStorage.item);
+  },
 };
 </script>
 
 <style scoped>
-
-#t{
-display: flex;
-padding: 1em;
-font-size: 20px;
-flex-wrap: wrap;
-letter-spacing: 5px;
+#t {
+  display: flex;
+  padding: 1em;
+  font-size: 20px;
+  flex-wrap: wrap;
+  letter-spacing: 5px;
 }
 .v-product-cart {
   overflow-x: hidden;
@@ -88,12 +128,12 @@ letter-spacing: 5px;
 .product-contant {
   background: #111113;
   display: flex;
-padding: 10px;
+  padding: 10px;
   margin: auto;
 }
 
 .product-title {
-    letter-spacing: 5px;
+  letter-spacing: 5px;
   text-align: center;
   font-size: 40px;
   font-weight: 600;
@@ -101,7 +141,7 @@ padding: 10px;
 }
 .product-img {
   width: 100%;
-  
+
   height: auto;
 }
 
@@ -116,12 +156,12 @@ padding: 10px;
   width: 100%;
   text-align: left;
 }
-.product-desc{
-    border-top: #ffffff 1px solid;
+.product-desc {
+  border-top: #ffffff 1px solid;
 }
 .product-price {
-  margin-top:20px ;
-    margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   max-width: 90px;
   font-size: 20px;
   font-weight: 600;
@@ -139,41 +179,41 @@ padding: 10px;
   display: flex;
 }
 
-.product-button-addToShoppingCart{
-        background: #fff;
-    color: #000;
-    position: relative;
-    display: -webkit-box;
-    display: flex;
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
-    width: 277px;
-    height: 50px;
-    margin-top: 45px;
-    border-radius: 1000px;
-    background: #000;
-    color: #fff;
-    font-size: 15px;
-    font-weight: 400;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+.product-button-addToShoppingCart {
+  background: #fff;
+  color: #000;
+  position: relative;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 277px;
+  height: 50px;
+  margin-top: 45px;
+  border-radius: 1000px;
+  background: #000;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-.addCast{
+.addCast {
   display: flex;
   text-align: center;
   justify-content: center;
 }
-.product-absolute-informations{
-    font-size: 20px;
-    padding-top: 30px;
-    width: 70%;
-    flex-wrap: wrap;
+.product-absolute-informations {
+  font-size: 20px;
+  padding-top: 30px;
+  width: 70%;
+  flex-wrap: wrap;
 }
 
-.product-absolute-informations p{
+.product-absolute-informations p {
   flex-wrap: wrap;
   word-wrap: wrap;
 }
@@ -181,21 +221,18 @@ padding: 10px;
   .product-contant {
     display: block;
   }
-  .product-button-addToShoppingCart{
+  .product-button-addToShoppingCart {
     width: 40%;
   }
 }
 
-@media (max-width:500px) {
-  #t{
+@media (max-width: 500px) {
+  #t {
     font-size: 15px;
     letter-spacing: 3px;
   }
-  .product-button-addToShoppingCart{
+  .product-button-addToShoppingCart {
     font-size: 12px;
   }
-
-  
 }
-
 </style>

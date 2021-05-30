@@ -1,5 +1,5 @@
 <template>
-  <div class="v-catalog">
+  <div class="v-catalog" v-bind:class="{lock:true}" >
     <div class="catalog-title">
       <span>Каталог</span>
     </div>
@@ -119,6 +119,7 @@ export default {
         t: type,
         y: year,
         s: state,
+        c:1
       };
       localStorage.setItem("item", JSON.stringify(selectP));
       this.$router.push("/catalog/" + name);
@@ -140,6 +141,11 @@ export default {
   justify-content: center;
   display: block;
   flex-wrap: wrap;
+}
+
+.lock{
+   overflow-y: hidden;
+  overflow-x: hidden;
 }
 .catalogList {
   display: flex;
@@ -183,7 +189,7 @@ export default {
   top: 0;
   left: 0;
   border-radius: 0 0 1em 0;
-  z-index: 100;
+  z-index: 1;
   display: flex;
   padding: 0 1em;
   background: #000;

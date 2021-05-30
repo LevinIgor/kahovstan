@@ -1,8 +1,5 @@
 <template>
   <div class="v-catalog_page">
-    <vModalShopingCart
-      :v-if="$store.getters.getIsShowPopupShoppingCart"
-    ></vModalShopingCart>
     <v-header></v-header>
     <div
       @click="closePopupShop"
@@ -15,6 +12,8 @@
     </div>
     <v-catalog> </v-catalog>
     <v-footer></v-footer>
+    <vModalShopingCart :v-if="$store.getters.getIsShowPopupShoppingCart">
+    </vModalShopingCart>
   </div>
 </template>
 
@@ -46,8 +45,6 @@ export default {
       this.isOpenPopupShop = false;
     },
   },
-
-  
 };
 </script>
 
@@ -63,6 +60,5 @@ export default {
 }
 
 .popup-bg-open {
-  display: block;
 }
 </style>
