@@ -143,7 +143,7 @@ this.$router.push("/")
 #inp {
   width: 100%;
   height: 36px;
-  padding: 0 15px;
+  padding: inherit;
   border-radius: 1000px;
   background: #f4f6f8;
 }

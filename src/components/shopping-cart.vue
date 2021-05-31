@@ -26,7 +26,11 @@
       </div>
       <div class="cart-title">Мои покупки</div>
       <div class="cart-lists">
-        <div class="cart-list" v-for="item in editShopCart" :key="item.n">
+        <div
+          class="cart-list"
+          v-for="item in $store.getters.GET_SHOPPING_CART"
+          :key="item.n"
+        >
           <div class="img">
             <div class="deleteProduct" @click="deleteProduct(item.n)">
               <svg
@@ -86,15 +90,15 @@
       <div class="cart-bottom">
         <div class="summ">
           <span class="costTitle">Общая стоимость</span>
-          <span class="costValue">{{ summ }}</span>
+          <span class="costValue">{{ summ }} UAH</span>
         </div>
         <div class="ship">
           <span class="shipTitle">Доставка</span>
-          <span class="shipValue">{{ shopping }} UAH</span>
+          <span class="shipValue">{{ship}} UAH</span>
         </div>
         <div class="total">
           <span class="totalTitle">Итого</span>
-          <span class="totalValue">{{ total }} UAH</span>
+          <span class="totalValue">{{total}} UAH</span>
         </div>
         <button @click="booking" class="buttonCheckout">
           <span>Оформить заказ</span>
@@ -111,60 +115,53 @@ export default {
     return {
       count: 1,
       isShowModalShoppingCart: false,
-      editShopCart: [JSON.parse(localStorage.shoppingCart)],
-      summ: 0,
-      shopping: 0,
       total: 0,
+      ship: 0,
+      summ: 0,
     };
   },
   methods: {
-    countPlus(name) {
-      this.editShopCart.forEach((item) => {
-        if (item.n == name) {
-          item.c++;
-          localStorage.setItem(
-            "shoppingCart",
-            JSON.stringify(this.editShopCart)
-          );
+    deleteProduct(name) {
+      var _items = this.$store.getters.GET_SHOPPING_CART.filter(
+        (item) => item.n !== name
+      );
+      
+  this.$state.commit("deteleProduct", _items)
+      this.refreshSumm()
+    },
+
+    countPlus(item) {
+      this.$store.state.shoppingCart.forEach((element) => {
+        if (element.n == item) {
+          element.c++;
         }
       });
-
-      this.refresh();
+      this.refreshSumm()
     },
-    countMinus(name) {
-      this.editShopCart.forEach((item) => {
-        if (item.n == name) {
-          if (item.c > 1) {
-            item.c--;
-            localStorage.setItem(
-              "shoppingCart",
-              JSON.stringify(this.editShopCart)
-            );
-            this.refresh();
+    countMinus(item) {
+      this.$store.state.shoppingCart.forEach((element) => {
+        if (element.n == item) {
+          if (element.c > 1) {
+            element.c--;
           }
         }
       });
+    this.refreshSumm()
     },
-    refresh() {
-      this.summ = 0;
-      this.editShopCart.forEach((item) => {
-        this.summ = this.summ + parseInt(item.p) * item.c;
-      });
 
-      this.shopping = (this.summ * 40) / 100;
+    refreshSumm()
+    {
+      this.summ=0
+      this.$store.state.shoppingCart.forEach((element) => {
+      this.summ += parseInt( element.p)* parseInt(element.c) ;
+    });
+    this.ship = (this.summ * 40) / 100;
 
-      this.total = this.shopping + this.summ;
-
-      var shoppingCart = JSON.parse(localStorage.shoppingCart);
-      this.editShopCart = shoppingCart.filter((item) => item.name !== "");
+      this.total = this.ship + this.summ;
     },
 
     closeModalShoppingCart() {
       this.$store.commit("closePopupShoppingCart");
-    },
-    deleteProduct(name) {
-      this.editShopCart = this.editShopCart.filter((item) => item.n !== name);
-      localStorage.setItem("shoppingCart", JSON.stringify(this.editShopCart));
     },
 
     booking() {
@@ -172,17 +169,27 @@ export default {
       this.$router.push("/booking");
     },
   },
-
   created() {
-   var shoppingCart = JSON.parse(localStorage.shoppingCart);
-    this.editShopCart = shoppingCart.filter((item) => item.name !== "");
-    this.editShopCart.forEach((item) => {
-    this.summ = this.summ + parseInt(item.p) * item.c;
-    });
-
-    this.shopping = (this.summ * 40) / 100;
-    this.total = this.shopping + this.summ;
+    if (localStorage.shoppingCart !== undefined) {
+      this.$store.state.shoppingCart = JSON.parse(localStorage.shoppingCart);
+    }
+    
   },
+  updated() {
+    localStorage.setItem(
+      "shoppingCart",
+      JSON.stringify(this.$store.getters.GET_SHOPPING_CART)
+    );
+    
+  },
+  mounted()
+  {
+    this.refreshSumm()
+  },
+  computed:{
+    
+  }
+  
 };
 </script>
 

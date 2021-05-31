@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import wood from './wood'
+
 
 export default createStore({
     state: {
@@ -10,10 +10,6 @@ export default createStore({
         shoppingCart: []
     },
     mutations: {
-        countt(state) {
-            state.count++;
-            console.log(state.count)
-        },
         closePopupShoppingCart(state) {
             state.isShowPopupShoppingCart = true
         },
@@ -26,6 +22,13 @@ export default createStore({
         sortItemsPriceMinMax(state) {
             state.items.sort((a, b) => a.price > b.price ? 1 : -1);
         },
+        addProduct(state, product) {
+            state.shoppingCart.push(product)
+        },
+        deleteProduct(state, product) {
+            state.shoppingCart = product
+        }
+
 
     },
     actions: {
@@ -46,8 +49,5 @@ export default createStore({
             return state.shoppingCart
         }
 
-    },
-    components: {
-        wood
     }
 })

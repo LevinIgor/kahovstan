@@ -65,29 +65,16 @@ export default {
   },
   methods: {
     addToShoppingCart() {
-      var selectProduct = JSON.parse(localStorage.item);
-      var isContain = false;
-      var shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
-      var obj = [];
-      if (shoppingCart == undefined) {
-        obj.push(selectProduct);
-        localStorage.setItem("shoppingCart", JSON.stringify(obj));
-      } else {
-        shoppingCart.forEach((item) => {
-          if (item.n == this.selectItem.n) {
-            item.c++;
-            console.log("Contain");
-            isContain = true;
-            return;
-          }
-        });
-
-        if (isContain) {
-          localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
-        } else {
-          shoppingCart.push(selectProduct);
-          localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+      var contain = false;
+      this.$store.getters.GET_SHOPPING_CART.forEach((element) => {
+        if (element.n == this.selectItem.n) {
+          contain = true;
+          element.c++;
+          return;
         }
+      });
+      if (!contain) {
+        this.$store.commit("addProduct", this.selectItem);
       }
 
       this.$swal.fire({
