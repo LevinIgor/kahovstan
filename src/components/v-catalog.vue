@@ -1,5 +1,5 @@
 <template>
-  <div class="v-catalog" v-bind:class="{lock:true}" >
+  <div class="v-catalog" >
     <div class="catalog-title">
       <span>Каталог</span>
     </div>
@@ -143,10 +143,7 @@ export default {
   flex-wrap: wrap;
 }
 
-.lock{
-   overflow-y: hidden;
-  overflow-x: hidden;
-}
+
 .catalogList {
   display: flex;
   flex-wrap: wrap;

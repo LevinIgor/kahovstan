@@ -1,18 +1,9 @@
 <template>
   <div class="v-catalog_page">
     <v-header></v-header>
-    <div
-      @click="closePopupShop"
-      class="popup-bg"
-      v-bind:class="{ 'popup-bg-open': isOpenPopupShop }"
-    >
-      <div class="popup">
-        <button @click="closePopupShop">OK</button>
-      </div>
-    </div>
     <v-catalog> </v-catalog>
     <v-footer></v-footer>
-    <vModalShopingCart :v-if="$store.getters.getIsShowPopupShoppingCart">
+    <vModalShopingCart >
     </vModalShopingCart>
   </div>
 </template>
@@ -22,7 +13,7 @@ import vHeader from "../v-header";
 import vCatalog from "../v-catalog";
 import vFooter from "../v-footer";
 import vModalShopingCart from "../shopping-cart";
-import firebase from "../../../firebase";
+
 
 export default {
   components: {
@@ -33,8 +24,6 @@ export default {
   },
   data() {
     return {
-      isOpenPopupShop: false,
-      show: false,
     };
   },
   methods: {
@@ -49,16 +38,9 @@ export default {
 </script>
 
 <style scoped>
-.popup-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  display: none;
+.v-catalogPage{
+  position: relative;
 }
 
-.popup-bg-open {
-}
+
 </style>

@@ -220,7 +220,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 276px;
+  width: 40%;
   height: 50px;
   border-radius: 1000px;
   background: #000;

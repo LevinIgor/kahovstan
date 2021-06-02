@@ -8,6 +8,7 @@
     </div>
   <addNewProductComp v-if="isAdd"></addNewProductComp>
   <deleteProductComp v-if="isDelete"></deleteProductComp>
+  <editProductComp v-if="isEdit"></editProductComp>
     <v-footer></v-footer>
   </div>
 </template>
@@ -17,6 +18,7 @@ import vHeader from "../v-header";
 import vFooter from "../v-footer";
 import addNewProductComp from "../v-addProduct"
 import deleteProductComp from "../v-delete-product"
+import editProductComp from "../v-editProduct"
 export default {
   data() {
     return {
@@ -29,7 +31,8 @@ export default {
     vHeader,
     vFooter,
     addNewProductComp,
-    deleteProductComp
+    deleteProductComp,
+    editProductComp
   },
   methods: {
     is_Edit(){
@@ -54,7 +57,9 @@ export default {
 <style>
 
 
-
+.v-productEdit{
+  position: relative;
+}
 
 
 
