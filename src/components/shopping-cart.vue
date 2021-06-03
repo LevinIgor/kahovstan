@@ -175,12 +175,18 @@ export default {
     if (localStorage.shoppingCart !== undefined) {
       this.$store.state.shoppingCart = JSON.parse(localStorage.shoppingCart);
     }
+    
   },
   updated() {
     localStorage.setItem(
       "shoppingCart",
       JSON.stringify(this.$store.getters.GET_SHOPPING_CART)
     );
+
+    
+  },
+  beforeUpdate(){
+    this.refreshSumm()
   },
   mounted() {
     this.refreshSumm();

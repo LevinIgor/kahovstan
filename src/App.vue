@@ -17,7 +17,7 @@ export default {
   },
   mounted() {
     
-     this.$store.commit("getItemsFromFirestore")
+     this.$store.dispatch("getItemsFromFirestore")
     
   },
 };

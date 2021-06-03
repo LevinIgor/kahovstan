@@ -26,11 +26,13 @@ export default createStore({
         },
         addProduct(state, product) {
             state.shoppingCart.push(product);
+            localStorage.setItem("shoppingCart", JSON.stringify(state.shoppingCart))
         },
         deleteProduct(state, product) {
             state.shoppingCart = product;
         },
         getItemsFromFirestore(state) {
+            state.items = [];
             firebase
                 .firestore()
                 .collection("items")
@@ -39,8 +41,11 @@ export default createStore({
                     doc.forEach((doc) => state.items.push(doc.data()));
                 })
                 .catch((error) => console.log(error));
+
         },
         getItemsIdFromFirestore(state) {
+            state.itemsId = [];
+
             firebase
                 .firestore()
                 .collection("items")
@@ -49,12 +54,13 @@ export default createStore({
                     doc.forEach((doc) => state.itemsId.push(doc.id));
                 })
                 .catch((error) => console.log(error));
+
         },
         parsItemsAndId(state) {
             var i = 0;
             state.items.forEach((item) => {
                 state.itemsData.push({
-                    index: item.indexs[i],
+                    index: state.itemsId[i],
                     name: item.name,
                     price: item.price,
                     desc: item.desc,
@@ -65,9 +71,21 @@ export default createStore({
                 });
                 i++;
             });
+
+
         },
     },
-    actions: {},
+    actions: {
+        getItemsFromFirestore(state) {
+            state.commit("getItemsFromFirestore");
+        },
+        getItemsIdFromFirestore(state) {
+            state.commit("getItemsIdFromFirestore");
+        },
+        parsItemsAndId(state) {
+            state.commit("parsItemsAndId");
+        },
+    },
     modules: {},
     getters: {
         GETITEMSDATA(state) {
@@ -81,6 +99,10 @@ export default createStore({
         },
         GET_SHOPPING_CART(state) {
             return state.shoppingCart;
+        },
+
+        GET_ITEMSDATA(state) {
+            return state.itemsData;
         },
     },
 });

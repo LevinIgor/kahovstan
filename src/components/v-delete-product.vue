@@ -21,104 +21,68 @@ export default {
       items: [],
       indexs: [],
       productName: "",
+      deleteId: "",
       loader: false,
-      status: "",
+      status: false,
       back: false,
     };
   },
   methods: {
-    parsData() {
-      var i = 0;
-      var ix = "";
-      this.items.forEach((item) => {
-        this.datas.push({
-          index: this.indexs[i],
-          name: item.name,
-          price: item.price,
-          desc: item.desc,
-          fullDesc: item.fullDesc,
-          state: item.state,
-          year: item.year,
-          type: item.type,
-        });
-        i++;
-      });
-
+    deleteProduct() {
+      this.back=true
+      this.loader=true
+      this.$store.dispatch("getItemsFromFirestore");
+      this.$store.dispatch("getItemsIdFromFirestore");
       setTimeout(() => {
-        this.datas.forEach((element) => {
-          if (element.name == this.productName) {
-            ix = element.index;
-            return;
-          }
-        });
+        this.$store.dispatch("parsItemsAndId");
+      setTimeout(() => {
+          this.searchProductId();
+      }, 2000);
+      }, 2000);
 
-        if (ix == "") {
-          this.status = "Товар с таким именем не найден!";
-        } else {
+      setTimeout(
+        () => {
+          if (this.status == true) {
+            this.$swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Товар был удален",
+              showConfirmButton: false,
+              timer: 1000,
+            });
+          } else {
+            this.$swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Товар с таким именем не найден",
+              showConfirmButton: false,
+              timer: 1000,
+            });
+          } 
+           this.loader=false
+        this.back=false
+        this.productName=""
+        },
+      
+        5000
+      );
+    },
+    searchProductId() {
+      const items = this.$store.getters.GET_ITEMSDATA;
+      this.status = false;
+      items.forEach((element) => {
+        if (element.name == this.productName) {
+          this.status = true;
           firebase
             .firestore()
             .collection("items")
-            .doc(ix)
+            .doc(element.index)
             .delete()
-            .then(() => {
-              console.log("Document successfully deleted!");
-            })
-            .catch((error) => {
-              console.error("Error removing document: ", error);
-            });
-          this.status = "Документ был удален!";
+            .then()
+            .catch((error) => console.log(error));
+         
         }
-      }, 2000);
-    },
-
-     GetDataFromFirebase() {
-      this.datas = [];
-      firebase
-        .firestore()
-        .collection("items")
-        .get()
-        .then((doc) => {
-          doc.forEach((doc) => this.items.push(doc.data()));
-        })
-        .catch((error) => console.log(error));
-
-      firebase
-        .firestore()
-       .collection("items")
-        .get()
-        .then((doc) => {
-          doc.forEach((doc) => this.indexs.push(doc.id));
-          this.parsData();
-        })
-        .catch((error) => console.log(error));
-    },
-    deleteProduct() {
-      this.loader = true;
-      this.back = true;
-
-      setTimeout(() => {
-        this.loader = false;
-        this.GetDataFromFirebase();
-        if (this.status == "Товар с таким именем не найден!") {
-         this.$swal.fire({
-            position: "center",
-            icon: "error",
-            title: "Товар с таким именем не найден!",
-            showConfirmButton: false,
-            timer: 2000,
-          });
-        } else {
-           this.$swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Товар удален!",
-            showConfirmButton: false,
-            timer: 1000,
-          });
-          this.productName=""
-        }
-        this.back = false;
-      }, 4000);
+      });
     },
   },
 };
@@ -130,7 +94,6 @@ export default {
   margin: auto;
   display: block;
 }
-
 
 .title {
   text-align: center;

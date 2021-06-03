@@ -40,10 +40,14 @@ export default{
 </script>
 
 <style >
+
+
 .footer {
-    padding: 40px;
-    height: 100%;
-    width: auto;
+ 
+  
+   padding: 40px;
+    
+   
     background-color: black;
 }
 .footer .menu{

@@ -4,6 +4,7 @@ import vCatalog from "../components/pages/v-catalogPage";
 import vBooking from "../components/pages/v-booking";
 import vEdit from "../components/pages/v-productEdit";
 import vLogin from "../components/v-popup-login"
+import vFaq from "../components/pages/v-faq"
 import vProductCart from "../components/pages/v-product-cart";
 
 const routes = [{
@@ -37,6 +38,10 @@ const routes = [{
     {
         path: "/auth",
         component: vLogin
+    },
+    {
+        path: "/FAQ",
+        component: vFaq
     }
 ];
 

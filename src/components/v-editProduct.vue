@@ -7,7 +7,7 @@
     </div>
     <div class="product-inf">
       <div class="product-inf-title">
-        <span>Enter product name</span>
+        <span>Введите имя товара для удаления</span>
       </div>
       <div class="product-inf-input">
         <input
@@ -303,6 +303,13 @@ export default {
   text-align: center;
   font-size: 22px;
   padding: 40px;
+}
+
+.product-inf-title span{
+      font-size: 20px;
+    line-height: 25px;
+    color: #818d92;
+    text-transform: uppercase;
 }
 .product-inf_btn{
   margin: 20px auto;
