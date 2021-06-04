@@ -79,7 +79,7 @@ a{
 }
 
 .header {
-   
+   position: relative;
     height: 100%;
     width: auto;
     background-color: black;

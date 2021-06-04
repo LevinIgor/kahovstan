@@ -26,7 +26,7 @@ export default createStore({
         },
         addProduct(state, product) {
             state.shoppingCart.push(product);
-            localStorage.setItem("shoppingCart", JSON.stringify(state.shoppingCart))
+            localStorage.setItem("shoppingCart", JSON.stringify(state.shoppingCart));
         },
         deleteProduct(state, product) {
             state.shoppingCart = product;
@@ -41,7 +41,6 @@ export default createStore({
                     doc.forEach((doc) => state.items.push(doc.data()));
                 })
                 .catch((error) => console.log(error));
-
         },
         getItemsIdFromFirestore(state) {
             state.itemsId = [];
@@ -54,7 +53,6 @@ export default createStore({
                     doc.forEach((doc) => state.itemsId.push(doc.id));
                 })
                 .catch((error) => console.log(error));
-
         },
         parsItemsAndId(state) {
             var i = 0;
@@ -71,8 +69,6 @@ export default createStore({
                 });
                 i++;
             });
-
-
         },
     },
     actions: {

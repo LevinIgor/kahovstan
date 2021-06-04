@@ -64,39 +64,7 @@ export default {
     };
   },
   methods: {
-    print() {
-      //   firebase.firestore().collection("cities")
-      //     .get()
-      //     .then((querySnapshot) => {
-      //       querySnapshot.forEach((doc) => {
-      //         console.log(doc.id, " => ", doc.data());
-      //       });
-      //     });
-      //   firebase
-      //     .firestore()
-      //     .collection("cities")
-      //     .get()
-      //     .then((doc) => {
-      //      doc.forEach((doc=>
-      //      this.$store.state.items.push(doc.data())
-      //      ))
-      //     })
-      //     .catch((error) => console.log(error));
-      //     console.log(this.$store.state.items)
-      //   docRef
-      //     .get()
-      //     .then((doc) => {
-      //       if (doc.exists) {
-      //         console.log("Document data:", doc.data());
-      //       } else {
-      //         // doc.data() will be undefined in this case
-      //         console.log("No such document!");
-      //       }
-      //     })
-      //     .catch((error) => {
-      //       console.log("Error getting document:", error);
-      //     });
-    },
+    
     addLocation() {
       firebase
         .firestore()
