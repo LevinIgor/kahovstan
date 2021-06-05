@@ -6,7 +6,7 @@
     <div class="input-number">
       <span>Введите номер для удаления</span>
       <input type="number" name="" id="" v-model="Enumber" />
-      <button class="searchFaq" @click="getFaq">Поиск</button>
+      <button class="searchFaq" @click="getFaq">Удалить</button>
     </div>
     <div class="numbers">
         <span>Возможные номера:</span>
@@ -119,7 +119,7 @@ export default {
 
 .searchFaq{
    align-items: center;
-    width: 100px;
+    
     margin-left: 20px;
     border-radius: 1000px;
     background: #000;

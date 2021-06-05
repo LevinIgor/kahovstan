@@ -3,14 +3,14 @@
     <div class="catalog-title">
       <span>Каталог</span>
     </div>
-    <div class="filters">
+    <!-- <div class="filters">
       <div class="filterSortPriceMaxMin">
         <button @click="sortItemsPriceMaxMin">+</button>
       </div>
       <div class="filterSortPriceMinMax">
         <button @click="sortItemsPriceMinMax">-</button>
       </div>
-    </div>
+    </div> -->
     <div class="catalogList">
       <div
         class="item"
@@ -252,16 +252,16 @@ export default {
   position: relative;
   overflow: hidden;
   width: 100%;
-  height: 58px;
   margin-top: 20px;
   border-radius: 100px;
   cursor: pointer;
   background: #fff;
   border: none;
+  padding: 10px;
 }
 
 .product-name span {
-  position: absolute;
+  
   display: -webkit-box;
   display: flex;
   -webkit-box-pack: center;
@@ -276,7 +276,8 @@ export default {
   font-size: 20px;
   font-weight: 800;
   letter-spacing: 2px;
-  letter-spacing: 6px;
+  
+
 }
 
 .item:hover .product-content-blackout {

@@ -95,7 +95,6 @@ export default {
 
 .addFaq {
   align-items: center;
-  width: 30%;
   margin: auto;
   padding: 10px;
   margin-top: 45px;

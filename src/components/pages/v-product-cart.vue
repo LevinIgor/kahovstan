@@ -98,7 +98,7 @@ export default {
   padding: 1em;
   font-size: 20px;
   flex-wrap: wrap;
-  letter-spacing: 5px;
+  letter-spacing: 2px;
 }
 .v-product-cart {
   overflow-x: hidden;
@@ -144,34 +144,36 @@ export default {
 }
 
 .product-informations {
-  padding-left: 10px;
+  justify-content: center;
   width: 100%;
-  text-align: left;
 }
 .product-desc {
   border-top: #ffffff 1px solid;
 }
+
 .product-price {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  max-width: 90px;
-  font-size: 20px;
-  font-weight: 600;
   z-index: 1;
+  display: flex;
   padding: 0 1em;
-  background: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-  -webkit-box-align: center;
+  background: rgb(0, 0, 0);
+
   align-items: center;
   height: 2em;
-  border-radius: 100px;
   white-space: nowrap;
-  position: relative;
-  display: -webkit-box;
-  display: flex;
+}
+.product-price span {
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  vertical-align: baseline;
+  font-size: 25px;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
 }
 
 .product-button-addToShoppingCart {
+  cursor: pointer;
   background: #fff;
   color: #000;
   position: relative;
@@ -201,7 +203,7 @@ export default {
 .product-absolute-informations {
   font-size: 20px;
   padding-top: 30px;
-  width: 70%;
+  width: 100%;
   flex-wrap: wrap;
 }
 

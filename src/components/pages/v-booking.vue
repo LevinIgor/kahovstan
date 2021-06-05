@@ -26,7 +26,12 @@
 
           <div class="booking-details-name">Номер телефона</div>
           <div class="booking-details-name-input">
-            <input maxlength="255" type="text" id="inp" v-model="order.phone" />
+            <input
+              maxlength="255"
+              type="number"
+              id="inp"
+              v-model="order.phone"
+            />
           </div>
 
           <div class="booking-details-name">Почта</div>
@@ -37,6 +42,7 @@
               id="inp"
               v-model="order.email"
             />
+            <span>{{ mailMassage }}</span>
           </div>
 
           <div class="details">
@@ -84,27 +90,33 @@ export default {
         phone: "",
         email: "",
         comment: "",
-       product:[]
-
+        product: [],
+        time:Date()
       },
       massage: "ДОБАВИТЬ",
+      mailMassage: "",
     };
   },
   methods: {
     addBooking() {
-      if (
-        this.order.fname == "" &&
-        this.order.sname == "" &&
-        this.order.tname == "" &&
-        this.order.phone == "" &&
-        this.order.email == ""
+      if (!this.validEmail()) {
+        this.mailMassage = "Введите коректно ваш адресс!";
+        setTimeout(() => {
+          this.mailMassage = "";
+        }, 2000);
+        console.log("+");
+      } else if (
+        this.order.fname == "" ||
+        this.order.sname == "" ||
+        this.order.tname == "" ||
+        this.order.phone == ""
       ) {
         this.massage = "Заполните все поля!";
         setTimeout(() => {
           this.massage = "Добавить";
         }, 3000);
       } else {
-        this.order.product= JSON.parse(localStorage.shoppingCart)
+        this.order.product = JSON.parse(localStorage.shoppingCart);
         firebase
           .firestore()
           .collection("orders")
@@ -112,28 +124,33 @@ export default {
           .set(this.order)
           .then(() => {
             console.log("Order has been add");
-             this.order.fname = "";
-        this.order.sname = "";
-        this.order.tname = "";
-        this.order.phone = "";
-        this.order.email = "";
-        this.order.comment = "";
-        this.$swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Спасибо за заказ с вами свяжуться в ближайшее время",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-      localStorage.setItem("shoppingCart","")
+            this.order.fname = "";
+            this.order.sname = "";
+            this.order.tname = "";
+            this.order.phone = "";
+            this.order.email = "";
+            this.order.comment = "";
+            this.$swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Спасибо за заказ с вами свяжуться в ближайшее время",
+              showConfirmButton: false,
+              timer: 2000,
+            });
+            localStorage.clear()
           })
           .catch((error) => {
             console.error("Error writing document: ", error);
           });
 
-this.$router.push("/")
-       
+        this.$router.push("/");
       }
+    },
+    validEmail() {
+      var re =
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      return re.test(this.order.email);
     },
   },
 };
@@ -146,6 +163,7 @@ this.$router.push("/")
   padding: inherit;
   border-radius: 1000px;
   background: #f4f6f8;
+  padding-left: 20px;
 }
 
 #EditInputTextarea {

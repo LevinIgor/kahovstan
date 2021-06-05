@@ -112,10 +112,11 @@ export default {
   
   methods: {
     addNewProduct() {
+     var id = Math.random() * (1 - 100000) + 1;
       firebase
         .firestore()
         .collection("items")
-        .doc()
+        .doc(id.toString())
         .set({
           name: this.name,
           price: this.price,
@@ -125,6 +126,7 @@ export default {
           state: this.state,
           year: this.year,
           type: this.type,
+          id:id
         })
         .then(() => {
           (this.name = ""),
@@ -144,6 +146,14 @@ export default {
       setTimeout(() => {
         this.buttonName = "Добавить";
       }, 3000);
+
+       this.$swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Товар добавлен!",
+          showConfirmButton: false,
+          timer: 1000,
+        });
     },
   },
 };
@@ -220,7 +230,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40%;
+  width: auto;
   height: 50px;
   border-radius: 1000px;
   background: #000;

@@ -10,6 +10,7 @@ export default createStore({
         shoppingCart: [],
         itemsId: [],
         itemsData: [],
+        admin: false
     },
     mutations: {
         closePopupShoppingCart(state) {
@@ -70,6 +71,12 @@ export default createStore({
                 i++;
             });
         },
+        setShoppingCart(state) {
+            state.shoppingCart = JSON.parse(localStorage.shoppingCart)
+        },
+        admin(state) {
+            state.admin = true;
+        }
     },
     actions: {
         getItemsFromFirestore(state) {
@@ -100,5 +107,8 @@ export default createStore({
         GET_ITEMSDATA(state) {
             return state.itemsData;
         },
+        GET_ADMIN(state) {
+            return state.admin
+        }
     },
 });

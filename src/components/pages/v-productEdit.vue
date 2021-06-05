@@ -1,5 +1,5 @@
 <template>
-  <div class="v-productEdit">
+  <div class="v-productEdit" v-if="$store.getters.GET_ADMIN">
     <v-header></v-header>
     <div class="tabs">
       <div class="header-tab-product">

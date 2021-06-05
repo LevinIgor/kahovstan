@@ -10,7 +10,7 @@
                     <!-- <li v-for="(item, index) in this.$store.getters.getHeaderCategory" :key="index"><router-link :to="item">{{item}}</router-link> </li> -->
                    
                      <li><router-link to='/FAQ'>FAQ</router-link></li>
-                     <li> <router-link to="/">Статус заказа</router-link></li>
+                     <li> <router-link to="/contact">Контакты</router-link></li>
                     <!-- <li><router-link to="/catalog/edit">Редактор</router-link></li> -->
                   
                 </ul>

@@ -1,13 +1,15 @@
 <template>
   <div class="v-delete-product">
     <div class="title"><span>Удаление товара</span></div>
-    <div class="loader" v-if="loader">Загрузка</div>
-    <div class="loader_back" v-if="back"></div>
+
     <div class="field">
       <div class="field-title">Введите имя товара для удаления</div>
       <div class="field-value"><input type="text" v-model="productName" /></div>
     </div>
-
+<div class="help">
+  <span>Возможные имена:</span>
+  <button v-for="(item,key) in productNames" :key="key" @click="setName(item)"> {{item}}</button>
+</div>
     <button class="delete-btn" @click="deleteProduct">Удалить</button>
   </div>
 </template>
@@ -17,73 +19,54 @@ import firebase from "../../firebase";
 export default {
   data() {
     return {
-      datas: [],
-      items: [],
-      indexs: [],
       productName: "",
       deleteId: "",
-      loader: false,
-      status: false,
-      back: false,
+      productNames:[]
     };
   },
   methods: {
     deleteProduct() {
-      this.back=true
-      this.loader=true
+      var status = false;
+      this.productNames=[]
       this.$store.dispatch("getItemsFromFirestore");
-      this.$store.dispatch("getItemsIdFromFirestore");
-      setTimeout(() => {
-        this.$store.dispatch("parsItemsAndId");
-      setTimeout(() => {
-          this.searchProductId();
-      }, 2000);
-      }, 2000);
+      var items = this.$store.getters.GETITEMSDATA;
 
-      setTimeout(
-        () => {
-          if (this.status == true) {
+      setTimeout(() => {
+        items.forEach((element) => {
+          if (element.name == this.productName) {
+            status = true;
+            firebase
+              .firestore()
+              .collection("items")
+              .doc(element.id.toString())
+              .delete()
+              .then();
+
             this.$swal.fire({
               position: "center",
               icon: "success",
-              title: "Товар был удален",
+              title: "Продукт был удален",
               showConfirmButton: false,
+
               timer: 1000,
             });
-          } else {
-            this.$swal.fire({
-              position: "center",
-              icon: "error",
-              title: "Товар с таким именем не найден",
-              showConfirmButton: false,
-              timer: 1000,
-            });
-          } 
-           this.loader=false
-        this.back=false
-        this.productName=""
-        },
-      
-        5000
-      );
+          }
+          this.productNames.push(element.name)
+        });
+
+        if(!status){  this.$swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Продукт не был найден",
+          showConfirmButton: false,
+          timer: 1000,
+        });}
+      }, 1000);
     },
-    searchProductId() {
-      const items = this.$store.getters.GET_ITEMSDATA;
-      this.status = false;
-      items.forEach((element) => {
-        if (element.name == this.productName) {
-          this.status = true;
-          firebase
-            .firestore()
-            .collection("items")
-            .doc(element.index)
-            .delete()
-            .then()
-            .catch((error) => console.log(error));
-         
-        }
-      });
-    },
+    setName(name){
+      this.productName=name
+      this.deleteProduct()
+    }
   },
 };
 </script>
@@ -93,6 +76,7 @@ export default {
   width: 90%;
   margin: auto;
   display: block;
+  margin-bottom: 300px;
 }
 
 .title {

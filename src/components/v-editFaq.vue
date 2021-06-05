@@ -112,7 +112,7 @@ export default {
       this.$swal.fire({
         position: "center",
         icon: "success",
-        title: "Вопрос-ответ добавлен!",
+        title: "Вопрос-ответ изменен!",
         showConfirmButton: false,
         timer: 1000,
       });
@@ -134,6 +134,7 @@ export default {
   display: block;
   width: 90%;
   margin: auto;
+  margin-bottom: 300px;
 }
 
 .v-editFaq-title {
@@ -171,7 +172,6 @@ export default {
 }
 
 #btn {
-  width: 30%;
   border-radius: 1000px;
   background: #000;
   color: #fff;

@@ -3,25 +3,23 @@ import vAbout from "../components/pages/v-above";
 import vCatalog from "../components/pages/v-catalogPage";
 import vBooking from "../components/pages/v-booking";
 import vEdit from "../components/pages/v-productEdit";
-import vLogin from "../components/v-popup-login"
-import vFaq from "../components/pages/v-faq"
+import vLogin from "../components/v-popup-login";
+import vFaq from "../components/pages/v-faq";
 import vProductCart from "../components/pages/v-product-cart";
+import vContact from "../components/pages/v-contact";
+import v404 from "../components/pages/404";
 
 const routes = [{
         path: "/",
         name: "catalog",
         component: vCatalog,
-        meta: { title: "Kahovstan" }
+        meta: { title: "Kahovstan" },
     },
     {
         path: "/catalog",
-        component: vCatalog
+        component: vCatalog,
     },
-    {
-        path: "/about",
-        name: "about",
-        component: vAbout,
-    },
+
     {
         path: "/booking",
         component: vBooking,
@@ -37,12 +35,18 @@ const routes = [{
     },
     {
         path: "/auth",
-        component: vLogin
+        component: vLogin,
     },
     {
         path: "/FAQ",
-        component: vFaq
+        component: vFaq,
+    },
+    {
+        path: "/contact",
+        component: vContact,
     }
+
+
 ];
 
 const router = createRouter({
@@ -51,6 +55,6 @@ const router = createRouter({
 });
 
 router.beforeEach(() => {
-    document.title = "KAHOVSTAN"
+    document.title = "KAHOVSTAN";
 });
 export default router;

@@ -47,6 +47,7 @@ export default {
   methods: {
     login() {
       if (this.Authlogin == "1" && this.Authpassword == "2") {
+        this.$store.commit("admin")
         this.$router.push("/catalog/edit");
       } else {
         this.isCurentPass = true;

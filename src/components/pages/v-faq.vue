@@ -79,6 +79,7 @@ export default {
   justify-content: center;
 }
 .faq-item {
+  cursor: pointer;
   display: flex;
   margin: 40px;
   font-size: 20px;
