@@ -1,8 +1,9 @@
 <template>
   <div class="v-product-cart">
-    <v-header></v-header>
     <vModalShopingCart :v-if="$store.getters.getIsShowPopupShoppingCart">
     </vModalShopingCart>
+    <v-header></v-header>
+    
     <div class="product-cart">
       <div class="product-title">{{ selectItem.n }}</div>
       <div class="product-contant">
@@ -18,11 +19,11 @@
             <p>{{ selectItem.d }}</p>
           </div>
           <div class="product-year" id="t">
-            <div class="product-year-title">Год выпуска:</div>
+            <div class="product-year-title">Рік випуску:_</div>
             {{ selectItem.y }}г.
           </div>
           <div class="product-state" id="t">
-            <div class="product-state-title">Состояние:</div>
+            <div class="product-state-title">Стан:_</div>
             {{ selectItem.s }}
           </div>
           <div class="product-type" id="t">
@@ -34,7 +35,7 @@
               @click="addToShoppingCart()"
               class="product-button-addToShoppingCart"
             >
-              <span>Добавить в корзину</span>
+              <span>Додати до кошика</span>
             </button>
           </div>
         </div>
@@ -46,6 +47,7 @@
     </div>
     <v-footer></v-footer>
   </div>
+
 </template>
 
 <script>
@@ -93,6 +95,17 @@ export default {
 </script>
 
 <style scoped>
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
 #t {
   display: flex;
   padding: 1em;

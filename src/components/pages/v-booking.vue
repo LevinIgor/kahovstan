@@ -3,28 +3,28 @@
     <v-header></v-header>
 
     <div class="bookingContainer">
-      <div class="bookingTitle">Оформление заказа</div>
+      <div class="bookingTitle">Оформлення замовлення</div>
       <div class="booking-content">
         <div class="booking-details">
           <div class="booking-details-title" id="title">
-            Введите свои данные
+            Введіть свої данні
           </div>
-          <div class="booking-details-name">Имя</div>
+          <div class="booking-details-name">Імя</div>
           <div class="booking-details-name-input">
             <input maxlength="255" type="text" id="inp" v-model="order.fname" />
           </div>
 
-          <div class="booking-details-name">Фамилия</div>
+          <div class="booking-details-name">Прізвище</div>
           <div class="booking-details-name-input">
             <input maxlength="255" type="text" id="inp" v-model="order.sname" />
           </div>
 
-          <div class="booking-details-name">Отчество</div>
+          <div class="booking-details-name">По батькові</div>
           <div class="booking-details-name-input">
             <input maxlength="255" type="text" id="inp" v-model="order.tname" />
           </div>
 
-          <div class="booking-details-name">Номер телефона</div>
+          <div class="booking-details-name">Номер телефону</div>
           <div class="booking-details-name-input">
             <input
               maxlength="255"
@@ -34,7 +34,7 @@
             />
           </div>
 
-          <div class="booking-details-name">Почта</div>
+          <div class="booking-details-name">Пшта</div>
           <div class="booking-details-name-input">
             <input
               maxlength="255"
@@ -46,7 +46,7 @@
           </div>
 
           <div class="details">
-            <div class="booking-details-name">Коментарий к заказу</div>
+            <div class="booking-details-name">Коментарій до замовлення</div>
             <div class="details-input">
               <textarea
                 v-model="order.comment"

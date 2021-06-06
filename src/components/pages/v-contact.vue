@@ -1,10 +1,10 @@
 <template>
   <div class="v-contact">
     <vHeader></vHeader>
-
+<vShoppingCart></vShoppingCart>
     <div class="contacs">
       <div class="phone" id="block">
-        <span>Телефоны</span>
+        <span>Телефоні</span>
         <p>+380958437523</p>
           <p>+380958437523</p>
             <p>+380958437523</p>
@@ -13,14 +13,14 @@
 
       </div>
       <div class="adress" id="block">
-          <span>Адреса</span>
+          <span>Адреси</span>
         <p>г. Новая Каховка переулок Перемоги 12</p>
          <p>г. Новая Каховка переулок Перемоги 12</p>
           <p>г. Новая Каховка переулок Перемоги 12</p>
            <p>г. Новая Каховка переулок Перемоги 12</p>
       </div>
       <div class="mail" id="block">
-          <span>Почты</span>
+          <span>Наші поштові скриньки</span>
         <p>kahovstan@gmail.com</p>
         <p>kahovstan@gmail.com</p>
         <p>kahovstan@gmail.com</p>
@@ -28,7 +28,7 @@
         <p>kahovstan@gmail.com</p>
       </div>
       <div class="link" id="block">
-          <span>Наши соц сети</span>
+          <span>Наші соц мережі</span>
        <p>instagram/kahovstan</p>
        <p>instagram/kahovstan</p>
        <p>instagram/kahovstan</p>
@@ -45,10 +45,12 @@
 <script>
 import vHeader from "../v-header";
 import vFooter from "../v-footer";
+import vShoppingCart from "../shopping-cart"
 export default {
   components: {
     vHeader,
     vFooter,
+    vShoppingCart
   },
   data() {
     return {};

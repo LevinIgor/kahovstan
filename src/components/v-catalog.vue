@@ -1,16 +1,9 @@
 <template>
-  <div class="v-catalog" >
+  <div class="v-catalog">
     <div class="catalog-title">
-      <span>Каталог</span>
+      <span>Каталог товарів</span>
     </div>
-    <!-- <div class="filters">
-      <div class="filterSortPriceMaxMin">
-        <button @click="sortItemsPriceMaxMin">+</button>
-      </div>
-      <div class="filterSortPriceMinMax">
-        <button @click="sortItemsPriceMinMax">-</button>
-      </div>
-    </div> -->
+
     <div class="catalogList">
       <div
         class="item"
@@ -31,7 +24,7 @@
       >
         <div class="product-content">
           <div class="product-content-price">
-            <span>{{ item.price }} GNR</span>
+            <span>{{ item.price }} UAH</span>
           </div>
           <div class="product-content-img">
             <img :src="item.img" alt="" />
@@ -52,7 +45,6 @@
 
 <script>
 import firebase from "../../firebase";
-
 export default {
   name: "v-catalog",
   data() {
@@ -64,7 +56,6 @@ export default {
     };
   },
   methods: {
-    
     addLocation() {
       firebase
         .firestore()
@@ -87,7 +78,7 @@ export default {
         t: type,
         y: year,
         s: state,
-        c:1
+        c: 1,
       };
       localStorage.setItem("item", JSON.stringify(selectP));
       this.$router.push("/catalog/" + name);
@@ -110,7 +101,6 @@ export default {
   display: block;
   flex-wrap: wrap;
 }
-
 
 .catalogList {
   display: flex;
@@ -261,7 +251,6 @@ export default {
 }
 
 .product-name span {
-  
   display: -webkit-box;
   display: flex;
   -webkit-box-pack: center;
@@ -276,8 +265,6 @@ export default {
   font-size: 20px;
   font-weight: 800;
   letter-spacing: 2px;
-  
-
 }
 
 .item:hover .product-content-blackout {

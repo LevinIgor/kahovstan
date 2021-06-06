@@ -1,111 +1,115 @@
 <template>
-  <div class="shopping-cart" v-if="$store.getters.getIsShowPopupShoppingCart">
-    <div class="shopping-cart-back" @click="closeModalShoppingCart"></div>
-    <div class="cart" @click.stop>
-      <div class="back">
-        <button @click="closeModalShoppingCart">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="17"
-            height="32"
-            viewBox="0 0 17 32"
-            icon="arrow4"
-            class="default-modals-cart-continue-shopping-arrow"
-          >
-            <path
-              d="M2.2 16L16.7 1.5c.4-.4.4-.9 0-1.3s-.9-.4-1.3 0L.3 15.4c-.4.4-.4.9 0 1.3l15.2 15.1c.2.2.4.3.6.3.2 0 .5-.1.6-.3.4-.4.4-.9 0-1.3L2.2 16z"
-            ></path>
-          </svg>
-          <span> Продолжить покупки</span>
-        </button>
-      </div>
-      <div class="cart-title">Мои покупки</div>
-      <div class="cart-lists">
-        <div
-          class="cart-list"
-          v-for="item in $store.getters.GET_SHOPPING_CART"
-          :key="item.n"
-        >
-          <div class="img">
-            <div class="deleteProduct" @click="deleteProduct(item.n)">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="7"
-                height="7"
-                viewBox="0 0 7 7"
-                icon="cross2"
-              >
-                <path
-                  d="M7 .6L6.4 0 3.5 2.9.6 0 0 .6l2.9 2.9L0 6.4l.6.6 2.9-2.9L6.4 7l.6-.6-2.9-2.9z"
-                ></path>
-              </svg>
+  <transition name="slide-fade">
+    <div class="shopping-cart" v-if="$store.getters.getIsShowPopupShoppingCart">
+      <div class="shopping-cart-back" @click="closeModalShoppingCart"></div>
+      <div class="cart" @click.stop>
+        <div class="back">
+          <button @click="closeModalShoppingCart">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="17"
+              height="32"
+              viewBox="0 0 17 32"
+              icon="arrow4"
+              class="default-modals-cart-continue-shopping-arrow"
+            >
+              <path
+                d="M2.2 16L16.7 1.5c.4-.4.4-.9 0-1.3s-.9-.4-1.3 0L.3 15.4c-.4.4-.4.9 0 1.3l15.2 15.1c.2.2.4.3.6.3.2 0 .5-.1.6-.3.4-.4.4-.9 0-1.3L2.2 16z"
+              ></path>
+            </svg>
+            <span> Продовжити покупки</span>
+          </button>
+        </div>
+        <div class="cart-title">Мій кошик</div>
+        <div class="cart-lists">
+          
+          <div
+            class="cart-list"
+            v-for="item in $store.getters.GET_SHOPPING_CART"
+            :key="item.n"
+          > 
+         
+            <div class="img">
+              <div class="deleteProduct" @click="deleteProduct(item.n)">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="7"
+                  height="7"
+                  viewBox="0 0 7 7"
+                  icon="cross2"
+                >
+                  <path
+                    d="M7 .6L6.4 0 3.5 2.9.6 0 0 .6l2.9 2.9L0 6.4l.6.6 2.9-2.9L6.4 7l.6-.6-2.9-2.9z"
+                  ></path>
+                </svg>
+              </div>
+
+              <img :src="item.i" />
             </div>
 
-            <img :src="item.i" />
-          </div>
-
-          <div class="desc">
-            <div class="name">{{ item.n }}</div>
-            <div class="type">
-              <div class="type-top">Type</div>
-              <div class="type-bottom">{{ item.t }}</div>
-            </div>
-            <div class="type">
-              <div class="type-top">Количество</div>
-              <div class="count-bottom">
-                <div class="count-value">{{ item.c }}</div>
-                <div class="count-control">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="9"
-                    height="9"
-                    viewBox="0 0 9 9"
-                    icon="plus"
-                    @click="countPlus(item.n)"
-                  >
-                    <path d="M9 4H5V0H4v4H0v1h4v4h1V5h4z"></path>
-                  </svg>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="9"
-                    height="9"
-                    viewBox="0 0 9 9"
-                    icon="minus"
-                    @click="countMinus(item.n)"
-                  >
-                    <path d="M9 4v1H0V4z"></path>
-                  </svg>
+            <div class="desc">
+              <div class="name">{{ item.n }}</div>
+              <div class="type">
+                <div class="type-top">Тип</div>
+                <div class="type-bottom">{{ item.t }}</div>
+              </div>
+              <div class="type">
+                <div class="type-top">Кількість</div>
+                <div class="count-bottom">
+                  <div class="count-value">{{ item.c }}</div>
+                  <div class="count-control">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="9"
+                      height="9"
+                      viewBox="0 0 9 9"
+                      icon="plus"
+                      @click="countPlus(item.n)"
+                    >
+                      <path d="M9 4H5V0H4v4H0v1h4v4h1V5h4z"></path>
+                    </svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="9"
+                      height="9"
+                      viewBox="0 0 9 9"
+                      icon="minus"
+                      @click="countMinus(item.n)"
+                    >
+                      <path d="M9 4v1H0V4z"></path>
+                    </svg>
+                  </div>
                 </div>
               </div>
+              <div class="price">{{ item.p }} UAH</div>
             </div>
-            <div class="price">{{ item.p }} UAH</div>
           </div>
         </div>
-      </div>
-      <div class="cart-bottom">
-        <div class="summ">
-          <span class="costTitle">Общая стоимость</span>
-          <span class="costValue">{{ summ }} UAH</span>
+        <div class="cart-bottom">
+          <div class="summ">
+            <span class="costTitle">Загальна вартість</span>
+            <span class="costValue">{{ summ }} UAH</span>
+          </div>
+          <div class="ship">
+            <span class="shipTitle">Наліг</span>
+            <span class="shipValue">{{ ship }} UAH</span>
+          </div>
+          <div class="total">
+            <span class="totalTitle">Тотальна вартість</span>
+            <span class="totalValue">{{ total }} UAH</span>
+          </div>
+          <button @click="booking" class="buttonCheckout">
+            <span>Оформити замовлення</span>
+          </button>
         </div>
-        <div class="ship">
-          <span class="shipTitle">Доставка</span>
-          <span class="shipValue">{{ ship }} UAH</span>
-        </div>
-        <div class="total">
-          <span class="totalTitle">Итого</span>
-          <span class="totalValue">{{ total }} UAH</span>
-        </div>
-        <button @click="booking" class="buttonCheckout">
-          <span>Оформить заказ</span>
-        </button>
+       
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
 export default {
-  name: "shopping-cart",
   data() {
     return {
       count: 1,
@@ -159,8 +163,7 @@ export default {
     },
 
     booking() {
-     
-      if (this.$store.getters.GET_SHOPPING_CART.length !==0) {
+      if (this.$store.getters.GET_SHOPPING_CART.length !== 0) {
         this.$store.commit("closePopupShoppingCart");
         this.$router.push("/booking");
       }
@@ -183,13 +186,30 @@ export default {
   mounted() {
     this.refreshSumm();
   },
-  computed: {},
 };
 </script>
 
 <style scoped>
+
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
 .shopping-cart {
+  z-index: 10000;
   overflow: scroll;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .shopping-cart-back {
@@ -233,7 +253,7 @@ export default {
 .cart {
   position: absolute;
   top: 0;
-  width: 40%;
+  width: 30%;
   background-color: white;
   right: 0;
   flex-direction: column;
@@ -241,9 +261,9 @@ export default {
   z-index: 1000;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
   .cart {
-    width: 70%;
+    width: 60%;
   }
 }
 @media (max-width: 600px) {

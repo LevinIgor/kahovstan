@@ -3,7 +3,7 @@
     <div class="popup-back"></div>
     <div class="popup-login-content">
       <div class="login">
-        <div class="login-title" id="title">Login</div>
+        <div class="login-title" id="title">Логін</div>
         <div class="">
           <input
             v-model="Authlogin"
@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="password">
-        <div class="password-title" id="title">Password</div>
+        <div class="password-title" id="title">Пароль</div>
         <div class="">
           <input
             v-model="Authpassword"
@@ -29,7 +29,7 @@
           <span>Неверный логин или пароль!</span>
       </div>
       <div class="login-button">
-        <button @click="login" class="button-login">Вход</button>
+        <button @click="login" class="button-login">Вхід</button>
       </div>
     </div>
   </div>
