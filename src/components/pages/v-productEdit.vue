@@ -13,6 +13,7 @@
         <button class="tabClick" @click="is_EditFaq()">
           Редактировать вопрос
         </button>
+        <button  class="tabClick" @click="orders()">Заказы</button>
       </div>
     </div>
 
@@ -20,8 +21,10 @@
     <deleteProductComp v-if="isDelete"></deleteProductComp>
     <editProductComp v-if="isEdit"></editProductComp>
     <addFaq v-if="isAddFaq"></addFaq>
-    <deleteFaq  v-if="isDeleteFaq"></deleteFaq>
-    <editFaq  v-if="isEditFaq"></editfaq>
+    <deleteFaq v-if="isDeleteFaq"></deleteFaq>
+    <editFaq v-if="isEditFaq"></editFaq>
+    <orders v-if="isOrders"></orders>
+    <div class="margin"></div>
     <v-footer></v-footer>
   </div>
 </template>
@@ -33,8 +36,9 @@ import addNewProductComp from "../v-addProduct";
 import deleteProductComp from "../v-delete-product";
 import editProductComp from "../v-editProduct";
 import addFaq from "../v-addFaq";
-import editFaq from "../v-editFaq"
-import deleteFaq from "../v-deleteFaq"
+import editFaq from "../v-editFaq";
+import deleteFaq from "../v-deleteFaq";
+import orders from "../orders";
 export default {
   data() {
     return {
@@ -44,6 +48,7 @@ export default {
       isAddFaq: false,
       isDeleteFaq: false,
       isEditFaq: false,
+      isOrders: false,
     };
   },
   components: {
@@ -54,9 +59,19 @@ export default {
     editProductComp,
     addFaq,
     editFaq,
-    deleteFaq
+    deleteFaq,
+    orders,
   },
   methods: {
+    orders() {
+      this.isEdit = false;
+      this.isAdd = false;
+      this.isDelete = false;
+      this.isAddFaq = false;
+      this.isDeleteFaq = false;
+      this.isEditFaq = false;
+      this.isOrders = true;
+    },
     is_Edit() {
       this.isEdit = true;
       this.isAdd = false;
@@ -64,6 +79,7 @@ export default {
       this.isAddFaq = false;
       this.isDeleteFaq = false;
       this.isEditFaq = false;
+      this.isOrders = false;
     },
     is_Add() {
       this.isEdit = false;
@@ -72,6 +88,7 @@ export default {
       this.isAddFaq = false;
       this.isDeleteFaq = false;
       this.isEditFaq = false;
+      this.isOrders = false;
     },
     is_Delete() {
       this.isEdit = false;
@@ -80,6 +97,7 @@ export default {
       this.isAddFaq = false;
       this.isDeleteFaq = false;
       this.isEditFaq = false;
+      this.isOrders = false;
     },
     is_AddFaq() {
       this.isEdit = false;
@@ -88,6 +106,7 @@ export default {
       this.isAddFaq = true;
       this.isDeleteFaq = false;
       this.isEditFaq = false;
+      this.isOrders = false;
     },
     is_DeleteFaq() {
       this.isEdit = false;
@@ -96,6 +115,7 @@ export default {
       this.isAddFaq = false;
       this.isDeleteFaq = true;
       this.isEditFaq = false;
+      this.isOrders = false;
     },
     is_EditFaq() {
       this.isEdit = false;
@@ -104,12 +124,20 @@ export default {
       this.isAddFaq = false;
       this.isDeleteFaq = false;
       this.isEditFaq = true;
+      this.isOrders = false;
     },
+  },
+  mounted() {
+    this.$store.dispatch("getItemsFromFirestore");
+    this.$store.dispatch("getOrdersFromFirestore");
   },
 };
 </script>
 
 <style>
+.margin {
+  margin-bottom: 500px;
+}
 .v-productEdit {
   position: relative;
 }

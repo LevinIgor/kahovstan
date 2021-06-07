@@ -58,6 +58,9 @@
             </div>
           </div>
 
+<div class="totalSumm">
+  <input type="number" name="" id="" >
+</div>
           <div class="Next">
             <button type="submit" class="button-next" @click="addBooking()">
               <span> {{ massage }} </span>
@@ -91,7 +94,10 @@ export default {
         email: "",
         comment: "",
         product: [],
-        time:Date()
+        time:Date(24 * 3600 * 1000),
+        id:Math.random() * (1 - 100000) + 1,
+        isDone:false,
+        summ:0
       },
       massage: "ДОБАВИТЬ",
       mailMassage: "",
@@ -153,6 +159,13 @@ export default {
       return re.test(this.order.email);
     },
   },
+  mounted(){
+    var o=this.$store.getters.GET_SHOPPING_CART
+         o.forEach(element => {
+            this.order.summ = this.order.summ+(parseInt(element.p) *parseInt(element.c))
+            console.log(element)
+          });
+  }
 };
 </script>
 

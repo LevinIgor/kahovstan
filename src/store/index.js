@@ -3,14 +3,14 @@ import firebase from "../../firebase";
 
 export default createStore({
     state: {
-        count: 10,
         isShowPopupShoppingCart: false,
         items: [],
         selectProduct: {},
         shoppingCart: [],
         itemsId: [],
         itemsData: [],
-        admin: false
+        admin: false,
+        orders: [],
     },
     mutations: {
         closePopupShoppingCart(state) {
@@ -72,11 +72,22 @@ export default createStore({
             });
         },
         setShoppingCart(state) {
-            state.shoppingCart = JSON.parse(localStorage.shoppingCart)
+            state.shoppingCart = JSON.parse(localStorage.shoppingCart);
         },
         admin(state) {
             state.admin = true;
-        }
+        },
+        getOrders(state) {
+            state.orders = []
+            firebase
+                .firestore()
+                .collection("orders")
+                .get()
+                .then(
+                    (doc) => doc.forEach((doc) => state.orders.push(doc.data()))
+                )
+                .catch((error) => console.log(error));
+        },
     },
     actions: {
         getItemsFromFirestore(state) {
@@ -87,6 +98,9 @@ export default createStore({
         },
         parsItemsAndId(state) {
             state.commit("parsItemsAndId");
+        },
+        getOrdersFromFirestore(state) {
+            state.commit("getOrders");
         },
     },
     modules: {},
@@ -108,7 +122,10 @@ export default createStore({
             return state.itemsData;
         },
         GET_ADMIN(state) {
-            return state.admin
+            return state.admin;
+        },
+        GET_ORDERS(state) {
+            return state.orders
         }
     },
 });
