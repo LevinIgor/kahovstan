@@ -12,13 +12,12 @@ export default {
   components: {
     VMainWrapper,
   },
-  data() {},
-  methods: {
+  data() {
+    return {};
   },
+  methods: {},
   mounted() {
-    
-     this.$store.dispatch("getItemsFromFirestore")
-    
+    this.$store.dispatch("getItemsFromFirestore");
   },
 };
 </script>

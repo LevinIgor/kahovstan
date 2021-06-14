@@ -3,8 +3,7 @@
     <v-header></v-header>
     <v-catalog> </v-catalog>
     <v-footer></v-footer>
-    <vModalShopingCart >
-    </vModalShopingCart>
+    <vModalShopingCart> </vModalShopingCart>
   </div>
 </template>
 
@@ -14,7 +13,6 @@ import vCatalog from "../v-catalog";
 import vFooter from "../v-footer";
 import vModalShopingCart from "../shopping-cart";
 
-
 export default {
   components: {
     vHeader,
@@ -23,8 +21,7 @@ export default {
     vModalShopingCart,
   },
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
     openPopupShop() {
@@ -38,9 +35,7 @@ export default {
 </script>
 
 <style scoped>
-.v-catalogPage{
+.v-catalogPage {
   position: relative;
 }
-
-
 </style>

@@ -1,14 +1,11 @@
 <template>
   <div class="v-booking">
     <v-header></v-header>
-
     <div class="bookingContainer">
       <div class="bookingTitle">Оформлення замовлення</div>
       <div class="booking-content">
         <div class="booking-details">
-          <div class="booking-details-title" id="title">
-            Введіть свої данні
-          </div>
+          <div class="booking-details-title" id="title">Введіть свої данні</div>
           <div class="booking-details-name">Імя</div>
           <div class="booking-details-name-input">
             <input maxlength="255" type="text" id="inp" v-model="order.fname" />
@@ -33,7 +30,6 @@
               v-model="order.phone"
             />
           </div>
-
           <div class="booking-details-name">Пшта</div>
           <div class="booking-details-name-input">
             <input
@@ -58,9 +54,9 @@
             </div>
           </div>
 
-<div class="totalSumm">
-  <input type="number" name="" id="" >
-</div>
+          <div class="totalSumm">
+            <input type="number" name="" id="" />
+          </div>
           <div class="Next">
             <button type="submit" class="button-next" @click="addBooking()">
               <span> {{ massage }} </span>
@@ -94,12 +90,12 @@ export default {
         email: "",
         comment: "",
         product: [],
-        time:Date(24 * 3600 * 1000),
-        id:Math.random() * (1 - 100000) + 1,
-        isDone:false,
-        summ:0
+        time: Date(24 * 3600 * 1000),
+        id: Math.random() * (1 - 100000) + 1,
+        isDone: "В очереди",
+        summ: 0,
       },
-      massage: "ДОБАВИТЬ",
+      massage: "Завершити оформлення",
       mailMassage: "",
     };
   },
@@ -115,7 +111,7 @@ export default {
         this.order.fname == "" ||
         this.order.sname == "" ||
         this.order.tname == "" ||
-        this.order.phone == ""
+        this.order.phone.length < 10
       ) {
         this.massage = "Заполните все поля!";
         setTimeout(() => {
@@ -129,13 +125,6 @@ export default {
           .doc()
           .set(this.order)
           .then(() => {
-            console.log("Order has been add");
-            this.order.fname = "";
-            this.order.sname = "";
-            this.order.tname = "";
-            this.order.phone = "";
-            this.order.email = "";
-            this.order.comment = "";
             this.$swal.fire({
               position: "center",
               icon: "success",
@@ -143,7 +132,7 @@ export default {
               showConfirmButton: false,
               timer: 2000,
             });
-            localStorage.clear()
+            localStorage.clear();
           })
           .catch((error) => {
             console.error("Error writing document: ", error);
@@ -159,13 +148,13 @@ export default {
       return re.test(this.order.email);
     },
   },
-  mounted(){
-    var o=this.$store.getters.GET_SHOPPING_CART
-         o.forEach(element => {
-            this.order.summ = this.order.summ+(parseInt(element.p) *parseInt(element.c))
-            console.log(element)
-          });
-  }
+  mounted() {
+    var o = this.$store.getters.GET_SHOPPING_CART;
+    o.forEach((element) => {
+      this.order.summ =
+        this.order.summ + parseInt(element.p) * parseInt(element.c);
+    });
+  },
 };
 </script>
 

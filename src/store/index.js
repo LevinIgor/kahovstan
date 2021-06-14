@@ -87,6 +87,7 @@ export default createStore({
                     (doc) => doc.forEach((doc) => state.orders.push(doc.data()))
                 )
                 .catch((error) => console.log(error));
+            state.orders.rev
         },
     },
     actions: {

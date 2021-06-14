@@ -1,40 +1,26 @@
 <template>
   <div class="v-contact">
     <vHeader></vHeader>
-<vShoppingCart></vShoppingCart>
+    <vShoppingCart></vShoppingCart>
     <div class="contacs">
       <div class="phone" id="block">
         <span>Телефоні</span>
-        <p>+380958437523</p>
-          <p>+380958437523</p>
-            <p>+380958437523</p>
-              <p>+380958437523</p>
-                <p>+380958437523</p>
-
+        <p v-for="(item,key) in phone" :key="key" >{{item.value}}</p>
       </div>
       <div class="adress" id="block">
-          <span>Адреси</span>
-        <p>г. Новая Каховка переулок Перемоги 12</p>
-         <p>г. Новая Каховка переулок Перемоги 12</p>
-          <p>г. Новая Каховка переулок Перемоги 12</p>
-           <p>г. Новая Каховка переулок Перемоги 12</p>
+        <span>Адреси</span>
+        <p v-for="(item,key) in adress" :key="key">{{item.value}}</p>
+      
       </div>
       <div class="mail" id="block">
-          <span>Наші поштові скриньки</span>
-        <p>kahovstan@gmail.com</p>
-        <p>kahovstan@gmail.com</p>
-        <p>kahovstan@gmail.com</p>
-        <p>kahovstan@gmail.com</p>
-        <p>kahovstan@gmail.com</p>
+        <span>Наші поштові скриньки</span>
+        <p v-for="(item,key) in email" :key="key"> {{item.value}}</p>
+       
       </div>
       <div class="link" id="block">
-          <span>Наші соц мережі</span>
-       <p>instagram/kahovstan</p>
-       <p>instagram/kahovstan</p>
-       <p>instagram/kahovstan</p>
-       <p>instagram/kahovstan</p>
-       <p>instagram/kahovstan</p>
-       
+        <span>Наші соц мережі</span>
+        <p v-for="(item,key) in social" :key="key"> <a :href="item.value">{{item.value}}</a> </p>
+        
       </div>
     </div>
 
@@ -45,15 +31,54 @@
 <script>
 import vHeader from "../v-header";
 import vFooter from "../v-footer";
-import vShoppingCart from "../shopping-cart"
+import vShoppingCart from "../shopping-cart";
+import firebase from "../../../firebase";
 export default {
   components: {
     vHeader,
     vFooter,
-    vShoppingCart
+    vShoppingCart,
   },
   data() {
-    return {};
+    return {
+      contacts: [],
+      email: [],
+      phone: [],
+      adress: [],
+      social: [],
+    };
+  },
+  methods:{
+    parse(){
+      this.contacts.forEach(element => {
+        if(element.name=="phone")
+        this.phone.push(element)
+
+        if(element.name=="email")
+        this.email.push(element)
+
+        if(element.name=="adress")
+        this.adress.push(element)
+
+        if(element.name=="social")
+        this.social.push(element)
+      });
+    }
+  },
+  mounted() {
+    firebase
+      .firestore()
+      .collection("contact")
+      .get()
+      .then((doc) => {
+        doc.forEach((doc) => this.contacts.push(doc.data()));
+      })
+      .catch((error) => console.log(error));
+
+    setTimeout(() => {
+      this.parse()
+    }, 1000);
+
   },
 };
 </script>
@@ -67,8 +92,7 @@ export default {
   justify-content: center;
 }
 
-
-.phone{
+.phone {
   display: block;
 }
 
@@ -77,25 +101,24 @@ export default {
   border-radius: 20px;
   padding: 20px;
   margin: 40px;
-  background:rgb(255, 255, 255);
+  background: rgb(255, 255, 255);
   border: black 1px solid;
   flex-wrap: wrap;
   display: block;
 }
 
-.contacs span{
+.contacs span {
   padding: 20px;
   font-size: 22px;
 }
 
-.contacs p{
+.contacs p {
   font-size: 20px;
 }
-.contacs a{
+.contacs a {
   color: black;
   font-size: 20px;
   padding: 20px;
   flex-wrap: wrap;
 }
-
 </style>

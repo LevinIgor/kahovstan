@@ -19,7 +19,9 @@
 
       <div class="help">
         <span>Возможные имена:_</span>
-        <button v-for="(item,key) in names" :key="key" @click="setName(item)">{{item}}</button>
+        <button v-for="(item, key) in names" :key="key" @click="setName(item)">
+          {{ item }}
+        </button>
       </div>
 
       <div class="product-inf-btn">
@@ -66,18 +68,51 @@
           ></textarea>
         </div>
       </div>
-      <div class="fullDesc">
-        <div class="fullDesc-title" id="EditTitle">
-          <span>Full desc</span>
-        </div>
+      <div class="fullDesc-title" id="EditTitle">
+        <span>Full desc</span>
+      </div>
+      <div class="fullDesc" v-for="(item, index) in fullDesc" :key="index">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          class="addDesc"
+          @click="addDesc(index)"
+        >
+          <path fill="none" d="M0 0h24v24H0z" />
+          <path
+            fill="green"
+            d="M11 11V7h2v4h4v2h-4v4h-2v-4H7v-2h4zm1 11C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"
+          />
+        </svg>
+
+        <!--          Remove Svg Icon-->
+        <svg
+         
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          class="removeDesc"
+          @click="removeDesc(index, fullDesc)"
+        >
+          <path fill="none" d="M0 0h24v24H0z" />
+          <path
+            fill="#EC4899"
+            d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9.414l2.828-2.829 1.415 1.415L13.414 12l2.829 2.828-1.415 1.415L12 13.414l-2.828 2.829-1.415-1.415L10.586 12 7.757 9.172l1.415-1.415L12 10.586z"
+          />
+        </svg>
         <div class="fullDesc-input">
           <textarea
-            v-model="fullDesc"
+            v-model="item.value"
             name=""
             id="eEditInputTextarea"
             cols="30"
             rows="10"
-          ></textarea>
+          >
+item.value</textarea
+          >
         </div>
       </div>
       <div class="state">
@@ -121,7 +156,7 @@ export default {
       name: "",
       price: 0,
       desc: "",
-      fullDesc: "",
+      fullDesc: null,
       img: "",
       state: "",
       year: 0,
@@ -129,19 +164,26 @@ export default {
       searchName: "",
       isProductSearch: false,
       idProduct: "",
-      names:[]
+      names: [],
     };
   },
   methods: {
+    addDesc() {
+      this.fullDesc.push({ value: "" });
+     
+    },
+    removeDesc(index, fieldType) {
+      fieldType.splice(index, 1);
+    },
     editProduct() {
-      var status=false
-      this.names=[]
+      var status = false;
+      this.names = [];
       this.$store.dispatch("getItemsFromFirestore");
       var items = this.$store.getters.GETITEMSDATA;
       setTimeout(() => {
         items.forEach((element) => {
           if (element.name == this.searchName) {
-            status=true
+            status = true;
             this.idProduct = element.id;
             this.isProductSearch = true;
             this.name = element.name;
@@ -153,17 +195,16 @@ export default {
             this.year = element.year;
             this.img = element.img;
           }
-          this.names.push(element.name)
+          this.names.push(element.name);
         });
-        if(!status)
-        {
+        if (!status) {
           this.$swal.fire({
-          position: "center",
-          icon: "error",
-          title: "Продукт не был найден",
-          showConfirmButton: false,
-          timer: 1000,
-        })
+            position: "center",
+            icon: "error",
+            title: "Продукт не был найден",
+            showConfirmButton: false,
+            timer: 1000,
+          });
         }
       }, 1000);
     },
@@ -193,32 +234,32 @@ export default {
           id: id,
         })
         .then(
-            this.name = "",
-            this.price ="",
-            this.desc = "",
-            this.fullDesc = "",
-            this.type = "",
-            this.state ="",
-            this.year = "",
-            this.img = "",
+          (this.name = ""),
+          (this.price = ""),
+          (this.desc = ""),
+          (this.fullDesc = ""),
+          (this.type = ""),
+          (this.state = ""),
+          (this.year = ""),
+          (this.img = ""),
 
-            this.$swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Продукт был изменен!",
-          showConfirmButton: false,
-          timer: 1000,
-        })
+          this.$swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Продукт был изменен!",
+            showConfirmButton: false,
+            timer: 1000,
+          })
         )
         .catch((error) => console.log(error));
     },
-    nameChange(){
-      this.isProductSearch=false
+    nameChange() {
+      this.isProductSearch = false;
     },
-    setName(nameq){
-      this.searchName=nameq
-      this.editProduct()
-    }
+    setName(nameq) {
+      this.searchName = nameq;
+      this.editProduct();
+    },
   },
 };
 </script>
@@ -262,8 +303,6 @@ export default {
   text-transform: uppercase;
 }
 
-
-
 .v-editProduct input {
   flex-wrap: wrap;
   padding-left: 10px;
@@ -290,7 +329,4 @@ export default {
   font-size: 18px;
   font-weight: 500;
 }
-
-
-
 </style>

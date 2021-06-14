@@ -2,13 +2,18 @@
   <div class="orders">
     <div class="orderBack" v-if="isBack" @click="closeBack()">
       <div class="orderBackContent" @click.stop>
+        <div class="products">
+          <div class="productsTitle">Заказ</div>
+          <div class="productsText">
+            <p v-for="(item,key) in products" :key="key"> Name: {{item.n}}, Price: {{item.p}}, Count: {{item.c}}</p>
+          
+          </div>
+        </div>
         <div class="comment">
           <div class="commentTitle">Коментарий</div>
           <div class="commentText">{{ orderInf.comment }}</div>
         </div>
-        <div class="products" v-for="(item, key) in orders.product" :key="key">
-          {{ item }} kljkljlkj
-        </div>
+      
         <div class="date">
           <div class="dateTitle">Время</div>
           <div class="dateText">{{ orderInf.time }}</div>
@@ -35,8 +40,7 @@
           <td>{{ item.phone }}</td>
           <td>{{ item.summ }} UAH</td>
           <td @click.stop @click="done(item.id)">
-            <span >{{item.isDone}}</span>
-          
+            <span>{{ item.isDone }}</span>
           </td>
         </tr>
       </tbody>
@@ -62,24 +66,26 @@ export default {
   mounted() {
     this.$store.dispatch("getOrdersFromFirestore");
     this.orders = this.$store.getters.GET_ORDERS;
-    if (this.orders.isDone) {
-      this.isDone = true;
-      this.isProccess = false;
-    } else {
-      this.isProccess = true;
-      this.isDone = false;
-    }
+    setTimeout(() => {
+      this.orders.reverse();
+      console.log(this.orders)
+    }, 1000);
+    
+   
   },
   methods: {
     done(ID) {
-     
-      this.orders.forEach(element => {
-          if(element.id == ID){
-              
-                  element.isDone=!element.isDone
-    
-              
+      this.orders.forEach((element) => {
+        if (element.id == ID) {
+          if(element.isDone == "В очереди")
+          {
+            element.isDone = "Завершен"
           }
+          else{
+            element.isDone = "В очереди"
+          }
+         
+        }
       });
     },
     pOrder(ID) {
@@ -88,6 +94,7 @@ export default {
         if (element.id == ID) {
           this.orderInf.comment = element.comment;
           this.orderInf.time = element.time;
+          this.products=element.product
           return;
         }
       });
@@ -96,6 +103,9 @@ export default {
       this.isBack = false;
     },
   },
+  beforeDestroy(){
+    
+  }
 };
 </script>
 
@@ -156,17 +166,16 @@ export default {
   transition: 0.3s;
 }
 
-@media (max-width:700px) {
-  .orders thead{
+@media (max-width: 700px) {
+  .orders thead {
     font-size: 15px;
-
   }
 
-  .orders td{
+  .orders td {
     padding: 5px;
   }
 
-  .orders caption{
+  .orders caption {
     font-size: 20px;
     padding: 10px;
   }

@@ -1,5 +1,6 @@
 <template>
   <div class="v-header">
+  
     <div class="header">
       <div class="header__logo">
         <router-link :to="'/'"><img :src="logo" alt="" /></router-link>
@@ -18,6 +19,7 @@
 </template>
 
 <script>
+
 export default {
   name: "v-header",
   data() {
@@ -25,6 +27,7 @@ export default {
       logo: require("../assets/pics/kahovstanV2.png"),
       miniLogo: require("../assets/pics/K.S.png"),
       shopcart: require("../assets/pics/shopping-cart.svg"),
+      title:"KAHOiuyiuyVSTAN"
       
     };
   },
@@ -33,6 +36,14 @@ export default {
       this.$store.commit("openPopupShoppingCart");
     },
   },
+  created(){
+    head: {
+    meta: [
+      { name: 'kjhkjhkjh', content: 'My khj' }
+    ]
+     
+  }
+  }
 };
 </script>
 

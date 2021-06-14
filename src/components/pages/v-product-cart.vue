@@ -27,7 +27,7 @@
             {{ selectItem.s }}
           </div>
           <div class="product-type" id="t">
-            <div class="product-type-title">Тип:</div>
+            <div class="product-type-title">Тип:_</div>
             {{ selectItem.t }}
           </div>
           <div class="addCast">
@@ -42,7 +42,7 @@
       </div>
 
       <div class="product-absolute-informations">
-        <p>{{ selectItem.f }}</p>
+        <p v-for="(item, key) in selectItem.f " :key="key">{{item.value}}</p>
       </div>
     </div>
     <v-footer></v-footer>
@@ -223,6 +223,9 @@ export default {
 .product-absolute-informations p {
   flex-wrap: wrap;
   word-wrap: wrap;
+    text-indent: 1.5em; /* Отступ первой строки */
+    text-align: justify; /* Выравнивание по ширине */
+   
 }
 @media (max-width: 900px) {
   .product-contant {

@@ -1,13 +1,13 @@
 <template>
   <div class="v-productEdit">
-    <div class="productEditContainer" >
+    <div class="productEditContainer">
       <div class="editTitle">
         <span>Добавление товаров</span>
       </div>
       <div class="productEditContent">
         <div class="name">
           <div class="name-title" id="EditTitle">
-            <span>Name</span>
+            <span>НАзва</span>
           </div>
           <div class="name-input">
             <input v-model="this.name" type="text" name="" id="EditInput" />
@@ -15,7 +15,7 @@
         </div>
         <div class="price">
           <div class="price-title" id="EditTitle">
-            <span>Price</span>
+            <span>Ціна</span>
           </div>
           <div class="price-input">
             <input v-model="this.price" type="number" name="" id="EditInput" />
@@ -23,7 +23,7 @@
         </div>
         <div class="img">
           <div class="img-title" id="EditTitle">
-            <span>Img src</span>
+            <span>Шлях до фото</span>
           </div>
           <div class="img-input">
             <input v-model="this.img" type="text" name="" id="EditInput" />
@@ -31,7 +31,7 @@
         </div>
         <div class="desc">
           <div class="desc-title" id="EditTitle">
-            <span>Desc</span>
+            <span>Короткий запис</span>
           </div>
           <div class="desc-input">
             <textarea
@@ -45,11 +45,46 @@
         </div>
         <div class="fullDesc">
           <div class="fullDesc-title" id="EditTitle">
-            <span>Full desc</span>
+            <span>Повний опис</span>
           </div>
-          <div class="fullDesc-input">
+          <div
+            class="fullDesc-input"
+            v-for="(item, index) in fullDescs"
+            :key="index"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              class="addDesc"
+              @click="addDesc(index)"
+            >
+              <path fill="none" d="M0 0h24v24H0z" />
+              <path
+                fill="green"
+                d="M11 11V7h2v4h4v2h-4v4h-2v-4H7v-2h4zm1 11C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"
+              />
+            </svg>
+
+            <!--          Remove Svg Icon-->
+            <svg
+              v-show="fullDescs.length > 1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              class="removeDesc"
+              @click="removeDesc(index, fullDescs)"
+            >
+              <path fill="none" d="M0 0h24v24H0z" />
+              <path
+                fill="#EC4899"
+                d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9.414l2.828-2.829 1.415 1.415L13.414 12l2.829 2.828-1.415 1.415L12 13.414l-2.828 2.829-1.415-1.415L10.586 12 7.757 9.172l1.415-1.415L12 10.586z"
+              />
+            </svg>
             <textarea
-              v-model="this.fullDesc"
+              v-model="item.value"
               name=""
               id="EditInputTextarea"
               cols="30"
@@ -59,7 +94,7 @@
         </div>
         <div class="state">
           <div class="state-title" id="EditTitle">
-            <span>State</span>
+            <span>Стан</span>
           </div>
           <div class="state-input">
             <input v-model="this.state" type="text" name="" id="EditInput" />
@@ -67,7 +102,7 @@
         </div>
         <div class="year">
           <div class="year-title" id="EditTitle">
-            <span>Year</span>
+            <span>Рік випуску</span>
           </div>
           <div class="year-input">
             <input v-model="this.year" type="number" name="" id="EditInput" />
@@ -75,7 +110,7 @@
         </div>
         <div class="type">
           <div class="type-title" id="EditTitle">
-            <span>Type</span>
+            <span>Тип</span>
           </div>
           <div class="type-input">
             <input v-model="this.type" type="text" name="" id="EditInput" />
@@ -88,7 +123,6 @@
         </div>
       </div>
     </div>
-  
   </div>
 </template>
 
@@ -100,17 +134,26 @@ export default {
       name: "",
       price: 0,
       desc: "",
-      fullDesc: "",
       img: "",
       state: "",
       year: 0,
       type: "",
       buttonName: "Добавить",
-     
+      fullDescs:[{value:""}]
+
     };
   },
-  
+
   methods: {
+    addDesc(index){
+this.fullDescs.push({value:""})
+
+    },
+    removeDesc(index, fieldType){
+
+      fieldType.splice(index, 1);
+
+    },
     addNewProduct() {
      var id = Math.random() * (1 - 100000) + 1;
       firebase
@@ -121,7 +164,7 @@ export default {
           name: this.name,
           price: this.price,
           desc: this.desc,
-          fullDesc: this.fullDesc,
+          fullDesc: this.fullDescs,
           img: this.img,
           state: this.state,
           year: this.year,
@@ -169,10 +212,7 @@ export default {
   padding: 40px;
   margin: auto;
   justify-content: center;
-
 }
-
-
 
 #EditTitle {
   font-size: 20px;

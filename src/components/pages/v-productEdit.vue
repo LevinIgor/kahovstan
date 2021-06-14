@@ -6,6 +6,7 @@
         <button class="tabClick" @click="is_Add()">Добавить товар</button>
         <button class="tabClick" @click="is_Delete()">Удалить товар</button>
         <button class="tabClick" @click="is_Edit()">Редактировать товар</button>
+        <button class="tabClick" @click="is_EditContact()">Контакты</button>
       </div>
       <div class="header-tab-faq">
         <button class="tabClick" @click="is_AddFaq()">Добавить вопрос</button>
@@ -24,6 +25,7 @@
     <deleteFaq v-if="isDeleteFaq"></deleteFaq>
     <editFaq v-if="isEditFaq"></editFaq>
     <orders v-if="isOrders"></orders>
+    <contacts v-if="isEditContact"></contacts>
     <div class="margin"></div>
     <v-footer></v-footer>
   </div>
@@ -39,6 +41,7 @@ import addFaq from "../v-addFaq";
 import editFaq from "../v-editFaq";
 import deleteFaq from "../v-deleteFaq";
 import orders from "../orders";
+import contacts from "../contactEdit"
 export default {
   data() {
     return {
@@ -49,6 +52,7 @@ export default {
       isDeleteFaq: false,
       isEditFaq: false,
       isOrders: false,
+      isEditContact:false
     };
   },
   components: {
@@ -61,6 +65,7 @@ export default {
     editFaq,
     deleteFaq,
     orders,
+    contacts
   },
   methods: {
     orders() {
@@ -71,6 +76,7 @@ export default {
       this.isDeleteFaq = false;
       this.isEditFaq = false;
       this.isOrders = true;
+       this.isEditContact=false
     },
     is_Edit() {
       this.isEdit = true;
@@ -80,6 +86,7 @@ export default {
       this.isDeleteFaq = false;
       this.isEditFaq = false;
       this.isOrders = false;
+       this.isEditContact=false
     },
     is_Add() {
       this.isEdit = false;
@@ -89,6 +96,7 @@ export default {
       this.isDeleteFaq = false;
       this.isEditFaq = false;
       this.isOrders = false;
+       this.isEditContact=false
     },
     is_Delete() {
       this.isEdit = false;
@@ -98,6 +106,7 @@ export default {
       this.isDeleteFaq = false;
       this.isEditFaq = false;
       this.isOrders = false;
+       this.isEditContact=false
     },
     is_AddFaq() {
       this.isEdit = false;
@@ -107,6 +116,7 @@ export default {
       this.isDeleteFaq = false;
       this.isEditFaq = false;
       this.isOrders = false;
+       this.isEditContact=false
     },
     is_DeleteFaq() {
       this.isEdit = false;
@@ -116,6 +126,7 @@ export default {
       this.isDeleteFaq = true;
       this.isEditFaq = false;
       this.isOrders = false;
+       this.isEditContact=false
     },
     is_EditFaq() {
       this.isEdit = false;
@@ -125,7 +136,18 @@ export default {
       this.isDeleteFaq = false;
       this.isEditFaq = true;
       this.isOrders = false;
+      this.isEditContact=false
     },
+    is_EditContact(){
+      this.isEdit = false;
+      this.isAdd = false;
+      this.isDelete = false;
+      this.isAddFaq = false;
+      this.isDeleteFaq = false;
+      this.isEditFaq = false;
+      this.isOrders = false;
+      this.isEditContact=true
+    }
   },
   mounted() {
     this.$store.dispatch("getItemsFromFirestore");
