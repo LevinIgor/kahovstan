@@ -1,25 +1,59 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import vAbout from "../components/pages/v-above";
+import vCatalog from "../components/pages/v-catalogPage";
+import vBooking from "../components/pages/v-booking";
+import vEdit from "../components/pages/v-productEdit";
+import vLogin from "../components/v-popup-login";
+import vFaq from "../components/pages/v-faq";
+import vProductCart from "../components/pages/v-product-cart";
+import vContact from "../components/pages/v-contact";
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+const routes = [{
+        path: "/",
+        name: "catalog",
+        component: vCatalog,
+        meta: { title: "Kahovstan" },
+    },
+    {
+        path: "/catalog",
+        component: vCatalog,
+    },
+
+    {
+        path: "/booking",
+        component: vBooking,
+    },
+
+    {
+        path: "/catalog/:id",
+        component: vProductCart,
+    },
+    {
+        path: "/catalog/edit",
+        component: vEdit,
+    },
+    {
+        path: "/auth",
+        component: vLogin,
+    },
+    {
+        path: "/FAQ",
+        component: vFaq,
+    },
+    {
+        path: "/contact",
+        component: vContact,
+    }
+
+
+];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+    history: createWebHistory(process.env.BASE_URL),
+    routes,
+});
 
-export default router
+router.beforeEach(() => {
+    document.title = "KAHOVSTAN";
+});
+export default router;

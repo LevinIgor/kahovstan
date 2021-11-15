@@ -1,30 +1,29 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <v-main-wrapper></v-main-wrapper>
   </div>
-  <router-view/>
 </template>
 
+<script>
+import VMainWrapper from "./components/v-main-wrapper.vue";
+
+export default {
+  name: "vue",
+  components: {
+    VMainWrapper,
+  },
+  data() {
+    return {};
+  },
+  methods: {},
+  mounted() {
+    this.$store.dispatch("getItemsFromFirestore");
+  },
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+body {
+  margin: 0;
 }
 </style>
