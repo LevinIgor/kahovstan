@@ -48,10 +48,15 @@
       </div>
       <div class="img">
         <div class="img-title" id="EditTitle">
-          <span>Img src</span>
+          <span>Img </span>
         </div>
         <div class="img-input">
-          <input v-model="img" type="text" name="" id="eEditInput" />
+          <input
+            type="file"
+            name=""
+            id="eEditInput"
+            @change="setImage($event)"
+          />
         </div>
       </div>
       <div class="desc">
@@ -89,7 +94,6 @@
 
         <!--          Remove Svg Icon-->
         <svg
-         
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           width="24"
@@ -170,7 +174,6 @@ export default {
   methods: {
     addDesc() {
       this.fullDesc.push({ value: "" });
-     
     },
     removeDesc(index, fieldType) {
       fieldType.splice(index, 1);
@@ -242,7 +245,6 @@ export default {
           (this.state = ""),
           (this.year = ""),
           (this.img = ""),
-
           this.$swal.fire({
             position: "center",
             icon: "success",
@@ -259,6 +261,24 @@ export default {
     setName(nameq) {
       this.searchName = nameq;
       this.editProduct();
+    },
+    setImage(e) {
+      var file = e.target.files[0];
+
+      firebase
+        .storage()
+        .ref(file.name)
+        .put(file)
+        .then(() =>
+          firebase
+            .storage()
+            .ref(file.name)
+            .getDownloadURL()
+            .then((ref) => {
+              this.img = ref
+              
+            })
+        );
     },
   },
 };

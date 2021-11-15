@@ -7,7 +7,6 @@ import vLogin from "../components/v-popup-login";
 import vFaq from "../components/pages/v-faq";
 import vProductCart from "../components/pages/v-product-cart";
 import vContact from "../components/pages/v-contact";
-import v404 from "../components/pages/404";
 
 const routes = [{
         path: "/",

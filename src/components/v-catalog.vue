@@ -3,11 +3,13 @@
     <div class="catalog-title">
       <span>Каталог товарів</span>
     </div>
-
+    <div class="search">
+      <input type="text" name="" id="" v-model="search"  placeholder="ПОИСК"/>
+    </div>
     <div class="catalogList">
       <div
         class="item"
-        v-for="(item, key) in this.$store.getters.GETITEMSDATA"
+        v-for="(item, key) in filteredList"
         :key="key"
         @click="
           routerPush(
@@ -31,7 +33,7 @@
           </div>
           <div class="product-content-blackout"></div>
           <button class="product-content-blackout-button">
-            <span>Подробнее</span>
+            <span>Подробніше</span>
           </button>
         </div>
 
@@ -53,7 +55,12 @@ export default {
       items: [],
       name: "pavel",
       img: require("../assets/pics/IMG.png"),
+      search: "",
     };
+  },
+  created(){
+     this.items = this.$store.getters.GETITEMSDATA
+     
   },
   methods: {
     addLocation() {
@@ -90,14 +97,37 @@ export default {
       this.$store.commit("sortItemsPriceMinMax");
     },
   },
+  computed: {
+    filteredList() {
+      return this.items.filter((post) => {
+        return post.name.toLowerCase().includes(this.search.toLowerCase());
+      });
+    },
+  },
 };
 </script>
 
 <style>
+.search{
+  border-bottom: rgb(192, 192, 192) 5px solid;
+  text-align: right;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+
+}
+.search input{
+ outline: none;
+  width: 30%;
+  height: 36px;
+  padding: 0 15px;
+  border-radius: 1000px;
+  background: #f4f6f8;
+}
+
 .v-catalog {
-  width: 90%;
+  width: 95%;
   margin: auto;
-  justify-content: center;
+  justify-content: space-between;
   display: block;
   flex-wrap: wrap;
 }
@@ -132,10 +162,10 @@ export default {
   display: flex;
 }
 .item {
-  width: 550px;
+  width: 450px;
   position: relative;
   display: block;
-  margin: 20px;
+  margin: 10px;
   text-align: center;
 }
 
@@ -180,8 +210,8 @@ export default {
 }
 
 .product-content {
-  height: 350px;
-  width: 550px;
+  height: 300px;
+  width: 100%;
   margin: auto;
   position: relative;
   overflow: hidden;

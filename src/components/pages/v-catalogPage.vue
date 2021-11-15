@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import vHeader from "../v-header";
+import vHeader from "../v-header.vue";
 import vCatalog from "../v-catalog";
 import vFooter from "../v-footer";
 import vModalShopingCart from "../shopping-cart";

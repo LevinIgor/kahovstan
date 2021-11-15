@@ -191,17 +191,6 @@ export default {
 
 <style scoped>
 
-.slide-fade-enter-active {
-  transition: all .3s ease;
-}
-.slide-fade-leave-active {
-  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
-  transform: translateX(10px);
-  opacity: 0;
-}
 .shopping-cart {
   z-index: 10000;
   overflow: scroll;
@@ -311,7 +300,6 @@ export default {
 
 .cart-title:after {
   content: "";
-  -webkit-box-flex: 1;
   flex: 1;
   height: 2px;
   margin-left: 18px;
@@ -482,16 +470,13 @@ export default {
   position: relative;
   display: -webkit-box;
   display: flex;
-  -webkit-box-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
   align-items: center;
   width: 70%;
   height: 50px;
   margin: auto;
   margin-top: 45px;
   margin-bottom: 45px;
-
   border-radius: 1000px;
   background: #000;
   color: #fff;

@@ -29,6 +29,7 @@
         </div>
       </div>
     </div>
+    <div class="margin"></div>
     <vFooter></vFooter>
   </div>
 </template>
@@ -77,6 +78,10 @@ export default {
 </script>
 
 <style scoped>
+
+.margin{
+  margin-bottom: 300px;
+}
 .faq-title {
   text-align: center;
   font-size: 30px;
@@ -84,6 +89,7 @@ export default {
   font-weight: 700;
   flex-wrap: wrap;
   margin: 20px;
+  font-size: 50px;
 }
 
 @media (max-width:400px) {
@@ -128,6 +134,7 @@ export default {
   padding: 10px;
   justify-content: center;
   align-items: center;
+  font-size: 30px;
 }
 .answerPopup {
   display: flex;
@@ -135,7 +142,7 @@ export default {
 }
 
 .answerPopupBack {
-  position: absolute;
+  position: fixed;
   transition: 1s;
   height: 100%;
   width: 100%;
@@ -158,5 +165,8 @@ export default {
   background: rgb(236, 234, 234);
   font-size: 20px;
   font-weight: 800;
+}
+.answerPopupText p{
+font-size: 30px;
 }
 </style>

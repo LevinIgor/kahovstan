@@ -26,7 +26,12 @@
             <span>Шлях до фото</span>
           </div>
           <div class="img-input">
-            <input v-model="this.img" type="text" name="" id="EditInput" />
+            <input
+              type="file"
+              name=""
+              id="EditInput"
+              @change="setImage($event)"
+            />
           </div>
         </div>
         <div class="desc">
@@ -139,23 +144,35 @@ export default {
       year: 0,
       type: "",
       buttonName: "Добавить",
-      fullDescs:[{value:""}]
-
+      fullDescs: [{ value: "" }],
     };
   },
 
   methods: {
-    addDesc(index){
-this.fullDescs.push({value:""})
-
+    addDesc() {
+      this.fullDescs.push({ value: "" });
     },
-    removeDesc(index, fieldType){
-
+    removeDesc(index, fieldType) {
       fieldType.splice(index, 1);
-
+    },
+    setImage(e) {
+      var image = e.target.files[0];
+      firebase
+        .storage()
+        .ref(image.name)
+        .put(image)
+        .then(() =>
+          firebase
+            .storage()
+            .ref(image.name)
+            .getDownloadURL()
+            .then((url) => {
+              this.img = url;
+            })
+        );
     },
     addNewProduct() {
-     var id = Math.random() * (1 - 100000) + 1;
+      var id = Math.random() * (1 - 100000) + 1;
       firebase
         .firestore()
         .collection("items")
@@ -169,13 +186,13 @@ this.fullDescs.push({value:""})
           state: this.state,
           year: this.year,
           type: this.type,
-          id:id
+          id: id,
         })
         .then(() => {
           (this.name = ""),
             (this.price = 0),
             (this.desc = ""),
-            (this.fullDesc = ""),
+            (this.fullDescs = [{ value: "" }]),
             (this.img = ""),
             (this.state = ""),
             (this.year = 0),
@@ -190,13 +207,13 @@ this.fullDescs.push({value:""})
         this.buttonName = "Добавить";
       }, 3000);
 
-       this.$swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Товар добавлен!",
-          showConfirmButton: false,
-          timer: 1000,
-        });
+      this.$swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Товар добавлен!",
+        showConfirmButton: false,
+        timer: 1000,
+      });
     },
   },
 };

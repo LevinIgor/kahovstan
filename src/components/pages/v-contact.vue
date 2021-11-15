@@ -23,7 +23,7 @@
         
       </div>
     </div>
-
+<div class="margin"></div>
     <vFooter></vFooter>
   </div>
 </template>
@@ -84,6 +84,10 @@ export default {
 </script>
 
 <style>
+
+.margin{
+  margin-bottom: 300px;
+}
 .contacs {
   display: flex;
   flex-wrap: wrap;

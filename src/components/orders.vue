@@ -66,10 +66,7 @@ export default {
   mounted() {
     this.$store.dispatch("getOrdersFromFirestore");
     this.orders = this.$store.getters.GET_ORDERS;
-    setTimeout(() => {
-      this.orders.reverse();
-      console.log(this.orders)
-    }, 1000);
+ 
     
    
   },

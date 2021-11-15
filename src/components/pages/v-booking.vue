@@ -30,7 +30,7 @@
               v-model="order.phone"
             />
           </div>
-          <div class="booking-details-name">Пшта</div>
+          <div class="booking-details-name">Пошта</div>
           <div class="booking-details-name-input">
             <input
               maxlength="255"
@@ -128,7 +128,7 @@ export default {
             this.$swal.fire({
               position: "center",
               icon: "success",
-              title: "Спасибо за заказ с вами свяжуться в ближайшее время",
+              title: "Дякую за замовлення! З вами зв'яжуться у найблищий час",
               showConfirmButton: false,
               timer: 2000,
             });

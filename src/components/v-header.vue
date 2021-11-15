@@ -9,6 +9,7 @@
         <ul>
           <li><router-link to="/FAQ">FAQ</router-link></li>
           <li><router-link to="/contact">Наші контакти</router-link></li>
+          
         </ul>
       </div>
       <div class="header__menu__second">
