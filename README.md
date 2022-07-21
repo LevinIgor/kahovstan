@@ -15,10 +15,10 @@ npm run serve
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+Дипломная работа, первый опыт работы со Vue, тогда еще 2 версии.
+Это ужасно, без всяких но)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Смотреть на свой страх и риск, можно получить пердечный сриступ
+https://kahovstan.web.app/
+
+
